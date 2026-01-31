@@ -4,25 +4,24 @@ add_rules {
 	"plugin.compile_commands.autoupdate"
 }
 
-target "Engine"
+target "Simulation"
 	set_languages("c++17")
 	add_defines "GLFW_INCLUDE_NONE"
 	set_kind "binary"
 	add_files {
 		"./src/*.cpp",
-		"./src/**/*.cpp",
+		--"./src/**/*.cpp",
 	}
 	add_includedirs {
 		"./src",
 		"./vendor/glfw/include",
 		"./vendor/glad/include",
 		"./vendor/spdlog/include",
-		"./vendor/entt/single_include/",
-		"./vendor/glm",
-		"./vendor/stb",
+		--"./vendor/entt/single_include/",
+		--"./vendor/glm",
+		--"./vendor/stb",
 		"./vendor/imgui",
 		"./vendor",
-		"./vendor/assimp/include"
 	}
 	add_deps {
 		"GLFW",
@@ -30,18 +29,20 @@ target "Engine"
 		"GLAD",
 		"IMGUI"
 	}
-	add_packages {
-		"assimp"
-	}
 	set_rundir "$(projectdir)"
-
-	add_links {
-		"opengl32",
-		"shell32",
-		"user32",
-		"gdi32",
-	}
-	add_cxflags("/utf-8", {force=true})
+	if is_plat("macosx") then
+		add_frameworks {
+			"OpenGL"
+		}
+	elseif is_plat("windows") then
+		add_links {
+			"opengl32",
+			"shell32",
+			"user32",
+			"gdi32",
+		}
+		add_cxflags("/utf-8", {force=true})
+	end
 
 target "IMGUI"
 	set_kind "static"
@@ -69,11 +70,23 @@ target "GLFW"
 		"./vendor/glfw/src/*.c",
 	}
 
-	add_defines {
-		"_GLFW_WIN32",
-		"_CRT_SECURE_NO_WARNINGS"
-	}
-	add_links "gdi32"
+	if is_plat("macosx") then
+		add_defines "_GLFW_COCOA"
+		add_files "./vendor/glfw/src/*.m"
+		add_mxflags "-fno-objc-arc"
+		add_frameworks {
+			"Cocoa",
+			"CoreFoundation",
+			"IOKit",
+			"QuartzCore"
+		}
+	elseif is_plat("windows") then
+		add_defines {
+			"_GLFW_WIN32",
+			"_CRT_SECURE_NO_WARNINGS"
+		}
+		add_links "gdi32"
+	end
 
 target "GLAD"
 	set_kind "static"
@@ -93,4 +106,6 @@ target "SPDLOG"
 		"./vendor/spdlog/include/spdlog"
 	}
 	add_files "./vendor/spdlog/src/*.cpp"
-	add_cxflags("/utf-8", {force=true})
+	if is_plat("windows") then
+		add_cxflags("/utf-8", {force=true})
+	end
