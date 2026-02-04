@@ -4,6 +4,7 @@
         "/Users/szammy/dev/projects/ouroboros/.xmake/macosx/arm64/xmake.conf"
     },
     values = {
+        "src/icosphere.cpp",
         "src/main.cpp",
         "src/window.cpp",
         "vendor/glad/include/glad/gl.h",

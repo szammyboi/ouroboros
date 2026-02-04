@@ -1,8 +1,28 @@
 [
 {
   "directory": "/Users/szammy/dev/projects/ouroboros",
-  "arguments": ["/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang", "-c", "-Qunused-arguments", "-target", "arm64-apple-macos15.7", "-isysroot", "/Applications/Xcode-beta.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.0.sdk", "-fvisibility=hidden", "-O3", "-Ivendor/glad/include", "-DGLAD_GLAPI_EXPORT", "-DNDEBUG", "-o", "build/.objs/GLAD/macosx/arm64/release/vendor/glad/src/gl.c.o", "vendor/glad/src/gl.c"],
-  "file": "vendor/glad/src/gl.c"
+  "arguments": ["/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang", "-c", "-pipe", "-DIBOutlet=__attribute__((iboutlet))", "-DIBOutletCollection(ClassName)=__attribute__((iboutletcollection(ClassName)))", "-DIBAction=void)__attribute__((ibaction)", "-Qunused-arguments", "-target", "arm64-apple-macos15.7", "-isysroot", "/Applications/Xcode-beta.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.0.sdk", "-fobjc-arc", "-fvisibility=hidden", "-O3", "-D_GLFW_COCOA", "-framework", "Cocoa", "-framework", "IOKit", "-framework", "QuartzCore", "-framework", "Foundation", "-framework", "CoreFoundation", "-fno-objc-arc", "-o", "build/.objs/GLFW/macosx/arm64/release/vendor/glfw/src/cocoa_joystick.m.o", "vendor/glfw/src/cocoa_joystick.m"],
+  "file": "vendor/glfw/src/cocoa_joystick.m"
+},
+{
+  "directory": "/Users/szammy/dev/projects/ouroboros",
+  "arguments": ["/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang", "-c", "-pipe", "-DIBOutlet=__attribute__((iboutlet))", "-DIBOutletCollection(ClassName)=__attribute__((iboutletcollection(ClassName)))", "-DIBAction=void)__attribute__((ibaction)", "-Qunused-arguments", "-target", "arm64-apple-macos15.7", "-isysroot", "/Applications/Xcode-beta.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.0.sdk", "-fobjc-arc", "-fvisibility=hidden", "-O3", "-D_GLFW_COCOA", "-framework", "Cocoa", "-framework", "IOKit", "-framework", "QuartzCore", "-framework", "Foundation", "-framework", "CoreFoundation", "-fno-objc-arc", "-o", "build/.objs/GLFW/macosx/arm64/release/vendor/glfw/src/cocoa_init.m.o", "vendor/glfw/src/cocoa_init.m"],
+  "file": "vendor/glfw/src/cocoa_init.m"
+},
+{
+  "directory": "/Users/szammy/dev/projects/ouroboros",
+  "arguments": ["/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang", "-c", "-pipe", "-DIBOutlet=__attribute__((iboutlet))", "-DIBOutletCollection(ClassName)=__attribute__((iboutletcollection(ClassName)))", "-DIBAction=void)__attribute__((ibaction)", "-Qunused-arguments", "-target", "arm64-apple-macos15.7", "-isysroot", "/Applications/Xcode-beta.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.0.sdk", "-fobjc-arc", "-fvisibility=hidden", "-O3", "-D_GLFW_COCOA", "-framework", "Cocoa", "-framework", "IOKit", "-framework", "QuartzCore", "-framework", "Foundation", "-framework", "CoreFoundation", "-fno-objc-arc", "-o", "build/.objs/GLFW/macosx/arm64/release/vendor/glfw/src/cocoa_window.m.o", "vendor/glfw/src/cocoa_window.m"],
+  "file": "vendor/glfw/src/cocoa_window.m"
+},
+{
+  "directory": "/Users/szammy/dev/projects/ouroboros",
+  "arguments": ["/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang", "-c", "-pipe", "-DIBOutlet=__attribute__((iboutlet))", "-DIBOutletCollection(ClassName)=__attribute__((iboutletcollection(ClassName)))", "-DIBAction=void)__attribute__((ibaction)", "-Qunused-arguments", "-target", "arm64-apple-macos15.7", "-isysroot", "/Applications/Xcode-beta.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.0.sdk", "-fobjc-arc", "-fvisibility=hidden", "-O3", "-D_GLFW_COCOA", "-framework", "Cocoa", "-framework", "IOKit", "-framework", "QuartzCore", "-framework", "Foundation", "-framework", "CoreFoundation", "-fno-objc-arc", "-o", "build/.objs/GLFW/macosx/arm64/release/vendor/glfw/src/nsgl_context.m.o", "vendor/glfw/src/nsgl_context.m"],
+  "file": "vendor/glfw/src/nsgl_context.m"
+},
+{
+  "directory": "/Users/szammy/dev/projects/ouroboros",
+  "arguments": ["/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang", "-c", "-pipe", "-DIBOutlet=__attribute__((iboutlet))", "-DIBOutletCollection(ClassName)=__attribute__((iboutletcollection(ClassName)))", "-DIBAction=void)__attribute__((ibaction)", "-Qunused-arguments", "-target", "arm64-apple-macos15.7", "-isysroot", "/Applications/Xcode-beta.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.0.sdk", "-fobjc-arc", "-fvisibility=hidden", "-O3", "-D_GLFW_COCOA", "-framework", "Cocoa", "-framework", "IOKit", "-framework", "QuartzCore", "-framework", "Foundation", "-framework", "CoreFoundation", "-fno-objc-arc", "-o", "build/.objs/GLFW/macosx/arm64/release/vendor/glfw/src/cocoa_monitor.m.o", "vendor/glfw/src/cocoa_monitor.m"],
+  "file": "vendor/glfw/src/cocoa_monitor.m"
 },
 {
   "directory": "/Users/szammy/dev/projects/ouroboros",
@@ -181,28 +201,18 @@
 },
 {
   "directory": "/Users/szammy/dev/projects/ouroboros",
-  "arguments": ["/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang", "-c", "-pipe", "-DIBOutlet=__attribute__((iboutlet))", "-DIBOutletCollection(ClassName)=__attribute__((iboutletcollection(ClassName)))", "-DIBAction=void)__attribute__((ibaction)", "-Qunused-arguments", "-target", "arm64-apple-macos15.7", "-isysroot", "/Applications/Xcode-beta.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.0.sdk", "-fobjc-arc", "-fvisibility=hidden", "-O3", "-D_GLFW_COCOA", "-framework", "Cocoa", "-framework", "IOKit", "-framework", "QuartzCore", "-framework", "Foundation", "-framework", "CoreFoundation", "-fno-objc-arc", "-o", "build/.objs/GLFW/macosx/arm64/release/vendor/glfw/src/cocoa_joystick.m.o", "vendor/glfw/src/cocoa_joystick.m"],
-  "file": "vendor/glfw/src/cocoa_joystick.m"
+  "arguments": ["/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang", "-c", "-Qunused-arguments", "-target", "arm64-apple-macos15.7", "-isysroot", "/Applications/Xcode-beta.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.0.sdk", "-fvisibility=hidden", "-fvisibility-inlines-hidden", "-O3", "-std=c++17", "-Isrc", "-Ivendor/glfw/include", "-Ivendor/glad/include", "-Ivendor/spdlog/include", "-Ivendor/glm", "-Ivendor/imgui", "-Ivendor", "-DGLFW_INCLUDE_NONE", "-framework", "OpenGL", "-framework", "Cocoa", "-framework", "IOKit", "-framework", "QuartzCore", "-framework", "Foundation", "-framework", "CoreFoundation", "-DNDEBUG", "-o", "build/.objs/Simulation/macosx/arm64/release/src/icosphere.cpp.o", "src/icosphere.cpp"],
+  "file": "src/icosphere.cpp"
 },
 {
   "directory": "/Users/szammy/dev/projects/ouroboros",
-  "arguments": ["/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang", "-c", "-pipe", "-DIBOutlet=__attribute__((iboutlet))", "-DIBOutletCollection(ClassName)=__attribute__((iboutletcollection(ClassName)))", "-DIBAction=void)__attribute__((ibaction)", "-Qunused-arguments", "-target", "arm64-apple-macos15.7", "-isysroot", "/Applications/Xcode-beta.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.0.sdk", "-fobjc-arc", "-fvisibility=hidden", "-O3", "-D_GLFW_COCOA", "-framework", "Cocoa", "-framework", "IOKit", "-framework", "QuartzCore", "-framework", "Foundation", "-framework", "CoreFoundation", "-fno-objc-arc", "-o", "build/.objs/GLFW/macosx/arm64/release/vendor/glfw/src/cocoa_init.m.o", "vendor/glfw/src/cocoa_init.m"],
-  "file": "vendor/glfw/src/cocoa_init.m"
+  "arguments": ["/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang", "-c", "-Qunused-arguments", "-target", "arm64-apple-macos15.7", "-isysroot", "/Applications/Xcode-beta.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.0.sdk", "-fvisibility=hidden", "-fvisibility-inlines-hidden", "-O3", "-std=c++17", "-Isrc", "-Ivendor/glfw/include", "-Ivendor/glad/include", "-Ivendor/spdlog/include", "-Ivendor/glm", "-Ivendor/imgui", "-Ivendor", "-DGLFW_INCLUDE_NONE", "-framework", "OpenGL", "-framework", "Cocoa", "-framework", "IOKit", "-framework", "QuartzCore", "-framework", "Foundation", "-framework", "CoreFoundation", "-DNDEBUG", "-o", "build/.objs/Simulation/macosx/arm64/release/src/window.cpp.o", "src/window.cpp"],
+  "file": "src/window.cpp"
 },
 {
   "directory": "/Users/szammy/dev/projects/ouroboros",
-  "arguments": ["/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang", "-c", "-pipe", "-DIBOutlet=__attribute__((iboutlet))", "-DIBOutletCollection(ClassName)=__attribute__((iboutletcollection(ClassName)))", "-DIBAction=void)__attribute__((ibaction)", "-Qunused-arguments", "-target", "arm64-apple-macos15.7", "-isysroot", "/Applications/Xcode-beta.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.0.sdk", "-fobjc-arc", "-fvisibility=hidden", "-O3", "-D_GLFW_COCOA", "-framework", "Cocoa", "-framework", "IOKit", "-framework", "QuartzCore", "-framework", "Foundation", "-framework", "CoreFoundation", "-fno-objc-arc", "-o", "build/.objs/GLFW/macosx/arm64/release/vendor/glfw/src/cocoa_window.m.o", "vendor/glfw/src/cocoa_window.m"],
-  "file": "vendor/glfw/src/cocoa_window.m"
-},
-{
-  "directory": "/Users/szammy/dev/projects/ouroboros",
-  "arguments": ["/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang", "-c", "-pipe", "-DIBOutlet=__attribute__((iboutlet))", "-DIBOutletCollection(ClassName)=__attribute__((iboutletcollection(ClassName)))", "-DIBAction=void)__attribute__((ibaction)", "-Qunused-arguments", "-target", "arm64-apple-macos15.7", "-isysroot", "/Applications/Xcode-beta.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.0.sdk", "-fobjc-arc", "-fvisibility=hidden", "-O3", "-D_GLFW_COCOA", "-framework", "Cocoa", "-framework", "IOKit", "-framework", "QuartzCore", "-framework", "Foundation", "-framework", "CoreFoundation", "-fno-objc-arc", "-o", "build/.objs/GLFW/macosx/arm64/release/vendor/glfw/src/nsgl_context.m.o", "vendor/glfw/src/nsgl_context.m"],
-  "file": "vendor/glfw/src/nsgl_context.m"
-},
-{
-  "directory": "/Users/szammy/dev/projects/ouroboros",
-  "arguments": ["/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang", "-c", "-pipe", "-DIBOutlet=__attribute__((iboutlet))", "-DIBOutletCollection(ClassName)=__attribute__((iboutletcollection(ClassName)))", "-DIBAction=void)__attribute__((ibaction)", "-Qunused-arguments", "-target", "arm64-apple-macos15.7", "-isysroot", "/Applications/Xcode-beta.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.0.sdk", "-fobjc-arc", "-fvisibility=hidden", "-O3", "-D_GLFW_COCOA", "-framework", "Cocoa", "-framework", "IOKit", "-framework", "QuartzCore", "-framework", "Foundation", "-framework", "CoreFoundation", "-fno-objc-arc", "-o", "build/.objs/GLFW/macosx/arm64/release/vendor/glfw/src/cocoa_monitor.m.o", "vendor/glfw/src/cocoa_monitor.m"],
-  "file": "vendor/glfw/src/cocoa_monitor.m"
+  "arguments": ["/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang", "-c", "-Qunused-arguments", "-target", "arm64-apple-macos15.7", "-isysroot", "/Applications/Xcode-beta.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.0.sdk", "-fvisibility=hidden", "-fvisibility-inlines-hidden", "-O3", "-std=c++17", "-Isrc", "-Ivendor/glfw/include", "-Ivendor/glad/include", "-Ivendor/spdlog/include", "-Ivendor/glm", "-Ivendor/imgui", "-Ivendor", "-DGLFW_INCLUDE_NONE", "-framework", "OpenGL", "-framework", "Cocoa", "-framework", "IOKit", "-framework", "QuartzCore", "-framework", "Foundation", "-framework", "CoreFoundation", "-DNDEBUG", "-o", "build/.objs/Simulation/macosx/arm64/release/src/main.cpp.o", "src/main.cpp"],
+  "file": "src/main.cpp"
 },
 {
   "directory": "/Users/szammy/dev/projects/ouroboros",
@@ -238,16 +248,6 @@
   "directory": "/Users/szammy/dev/projects/ouroboros",
   "arguments": ["/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang", "-c", "-Qunused-arguments", "-target", "arm64-apple-macos15.7", "-isysroot", "/Applications/Xcode-beta.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.0.sdk", "-fvisibility=hidden", "-fvisibility-inlines-hidden", "-O3", "-Ivendor/spdlog/include", "-Ivendor/spdlog/include/spdlog", "-DSPDLOG_COMPILED_LIB", "-DNDEBUG", "-o", "build/.objs/SPDLOG/macosx/arm64/release/vendor/spdlog/src/spdlog.cpp.o", "vendor/spdlog/src/spdlog.cpp"],
   "file": "vendor/spdlog/src/spdlog.cpp"
-},
-{
-  "directory": "/Users/szammy/dev/projects/ouroboros",
-  "arguments": ["/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang", "-c", "-Qunused-arguments", "-target", "arm64-apple-macos15.7", "-isysroot", "/Applications/Xcode-beta.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.0.sdk", "-fvisibility=hidden", "-fvisibility-inlines-hidden", "-O3", "-std=c++17", "-Isrc", "-Ivendor/glfw/include", "-Ivendor/glad/include", "-Ivendor/spdlog/include", "-Ivendor/imgui", "-Ivendor", "-DGLFW_INCLUDE_NONE", "-framework", "OpenGL", "-framework", "Cocoa", "-framework", "IOKit", "-framework", "QuartzCore", "-framework", "Foundation", "-framework", "CoreFoundation", "-DNDEBUG", "-o", "build/.objs/Simulation/macosx/arm64/release/src/window.cpp.o", "src/window.cpp"],
-  "file": "src/window.cpp"
-},
-{
-  "directory": "/Users/szammy/dev/projects/ouroboros",
-  "arguments": ["/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang", "-c", "-Qunused-arguments", "-target", "arm64-apple-macos15.7", "-isysroot", "/Applications/Xcode-beta.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.0.sdk", "-fvisibility=hidden", "-fvisibility-inlines-hidden", "-O3", "-std=c++17", "-Isrc", "-Ivendor/glfw/include", "-Ivendor/glad/include", "-Ivendor/spdlog/include", "-Ivendor/imgui", "-Ivendor", "-DGLFW_INCLUDE_NONE", "-framework", "OpenGL", "-framework", "Cocoa", "-framework", "IOKit", "-framework", "QuartzCore", "-framework", "Foundation", "-framework", "CoreFoundation", "-DNDEBUG", "-o", "build/.objs/Simulation/macosx/arm64/release/src/main.cpp.o", "src/main.cpp"],
-  "file": "src/main.cpp"
 },
 {
   "directory": "/Users/szammy/dev/projects/ouroboros",
@@ -288,4 +288,9 @@
   "directory": "/Users/szammy/dev/projects/ouroboros",
   "arguments": ["/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang", "-c", "-Qunused-arguments", "-target", "arm64-apple-macos15.7", "-isysroot", "/Applications/Xcode-beta.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.0.sdk", "-fvisibility=hidden", "-fvisibility-inlines-hidden", "-O3", "-Ivendor/imgui", "-Ivendor/glad/include", "-Ivendor/glfw/include", "-DIMGUI_IMPL_OPENGL_LOADER_GLAD", "-DNDEBUG", "-o", "build/.objs/IMGUI/macosx/arm64/release/vendor/imgui/misc/cpp/imgui_stdlib.cpp.o", "vendor/imgui/misc/cpp/imgui_stdlib.cpp"],
   "file": "vendor/imgui/misc/cpp/imgui_stdlib.cpp"
+},
+{
+  "directory": "/Users/szammy/dev/projects/ouroboros",
+  "arguments": ["/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang", "-c", "-Qunused-arguments", "-target", "arm64-apple-macos15.7", "-isysroot", "/Applications/Xcode-beta.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.0.sdk", "-fvisibility=hidden", "-O3", "-Ivendor/glad/include", "-DGLAD_GLAPI_EXPORT", "-DNDEBUG", "-o", "build/.objs/GLAD/macosx/arm64/release/vendor/glad/src/gl.c.o", "vendor/glad/src/gl.c"],
+  "file": "vendor/glad/src/gl.c"
 }]
