@@ -1,0 +1,23 @@
+#include "Body.h"
+#include <vector>
+
+namespace Ouroboros{
+    // Put more constants here
+    struct SimConfig
+    {
+        double G{6.67430e-11}; // Nm^2/kg^2
+        double simDt{1.0 / 240.0};
+    };
+
+    class Sim
+    {
+        public: 
+        Sim();
+        void step(float dt);
+        SimConfig config;
+
+        private:
+        std::vector<Body> Bodies;
+
+    };
+}
