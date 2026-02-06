@@ -10,7 +10,7 @@ target "Simulation"
 	set_kind "binary"
 	add_files {
 		"./src/*.cpp",
-		--"./src/**/*.cpp",
+		"./src/**/*.cpp",
 	}
 	add_includedirs {
 		"./src",

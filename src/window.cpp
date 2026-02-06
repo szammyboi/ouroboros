@@ -39,6 +39,9 @@ namespace Ouroboros {
 #endif
 		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
+		if (m_Specification.msaa_enabled)
+			glfwWindowHint(GLFW_SAMPLES, m_Specification.msaa_samples);
+
 		GLFWmonitor* monitor = glfwGetPrimaryMonitor();
 
 		if (m_Specification.fullscreen)
@@ -74,6 +77,9 @@ namespace Ouroboros {
 		int fb_w, fb_h;
 		glfwGetFramebufferSize(m_Window, &fb_w, &fb_h);
 		glViewport(0, 0, fb_w, fb_h);
+
+		if (m_Specification.msaa_enabled)
+			glEnable(GL_MULTISAMPLE); 
 		//		glViewport(0, 0, m_Specification.width, m_Specification.height);
 
 		glfwSetFramebufferSizeCallback(m_Window, FrameBufferSizeCallback);

@@ -13,6 +13,8 @@ namespace Ouroboros {
 		std::string title = "Ouroboros Simulator";
 		bool fullscreen = false;
 		bool resizable = false;
+		bool msaa_enabled = true;
+		float msaa_samples = 4;
 	};
 
 	class Window

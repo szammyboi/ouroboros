@@ -1,21 +1,5 @@
 {
-    files = {
-        [[vendor\imgui\imgui_tables.cpp]]
-    },
-    values = {
-        [[C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.40.33807\bin\HostX64\x64\cl.exe]],
-        {
-            "-nologo",
-            "-O2",
-            [[-Ivendor\imgui]],
-            [[-Ivendor\glad\include]],
-            [[-Ivendor\glfw\include]],
-            [[-Ibuild\.gens\IMGUI\windows\x64\release\platform\windows\idl]],
-            "-DIMGUI_IMPL_OPENGL_LOADER_GLAD",
-            "/EHsc",
-            "-DNDEBUG"
-        }
-    },
+    depfiles_format = "cl_json",
     depfiles = "{\
     \"Version\": \"1.2\",\
     \"Data\": {\
@@ -67,5 +51,21 @@
         \"ImportedHeaderUnits\": []\
     }\
 }",
-    depfiles_format = "cl_json"
+    files = {
+        [[vendor\imgui\imgui_tables.cpp]]
+    },
+    values = {
+        [[C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.40.33807\bin\HostX64\x64\cl.exe]],
+        {
+            "-nologo",
+            "-O2",
+            [[-Ivendor\imgui]],
+            [[-Ivendor\glad\include]],
+            [[-Ivendor\glfw\include]],
+            [[-Ibuild\.gens\IMGUI\windows\x64\release\platform\windows\idl]],
+            "-DIMGUI_IMPL_OPENGL_LOADER_GLAD",
+            "/EHsc",
+            "-DNDEBUG"
+        }
+    }
 }

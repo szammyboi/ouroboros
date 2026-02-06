@@ -1,18 +1,5 @@
 {
-    files = {
-        [[vendor\glfw\src\posix_thread.c]]
-    },
-    values = {
-        [[C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.40.33807\bin\HostX64\x64\cl.exe]],
-        {
-            "-nologo",
-            "-O2",
-            [[-Ibuild\.gens\GLFW\windows\x64\release\platform\windows\idl]],
-            "-D_GLFW_WIN32",
-            "-D_CRT_SECURE_NO_WARNINGS",
-            "-DNDEBUG"
-        }
-    },
+    depfiles_format = "cl_json",
     depfiles = "{\
     \"Version\": \"1.2\",\
     \"Data\": {\
@@ -222,5 +209,18 @@
         ]\
     }\
 }",
-    depfiles_format = "cl_json"
+    files = {
+        [[vendor\glfw\src\posix_thread.c]]
+    },
+    values = {
+        [[C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.40.33807\bin\HostX64\x64\cl.exe]],
+        {
+            "-nologo",
+            "-O2",
+            [[-Ibuild\.gens\GLFW\windows\x64\release\platform\windows\idl]],
+            "-D_GLFW_WIN32",
+            "-D_CRT_SECURE_NO_WARNINGS",
+            "-DNDEBUG"
+        }
+    }
 }

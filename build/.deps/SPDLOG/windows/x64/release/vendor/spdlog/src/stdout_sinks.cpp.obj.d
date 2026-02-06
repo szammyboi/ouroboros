@@ -2,20 +2,7 @@
     files = {
         [[vendor\spdlog\src\stdout_sinks.cpp]]
     },
-    values = {
-        [[C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.40.33807\bin\HostX64\x64\cl.exe]],
-        {
-            "-nologo",
-            "-O2",
-            [[-Ivendor\spdlog\include]],
-            [[-Ivendor\spdlog\include\spdlog]],
-            [[-Ibuild\.gens\SPDLOG\windows\x64\release\platform\windows\idl]],
-            "-DSPDLOG_COMPILED_LIB",
-            "/EHsc",
-            "/utf-8",
-            "-DNDEBUG"
-        }
-    },
+    depfiles_format = "cl_json",
     depfiles = "{\
     \"Version\": \"1.2\",\
     \"Data\": {\
@@ -284,5 +271,18 @@
         \"ImportedHeaderUnits\": []\
     }\
 }",
-    depfiles_format = "cl_json"
+    values = {
+        [[C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.40.33807\bin\HostX64\x64\cl.exe]],
+        {
+            "-nologo",
+            "-O2",
+            [[-Ivendor\spdlog\include]],
+            [[-Ivendor\spdlog\include\spdlog]],
+            [[-Ibuild\.gens\SPDLOG\windows\x64\release\platform\windows\idl]],
+            "-DSPDLOG_COMPILED_LIB",
+            "/EHsc",
+            "/utf-8",
+            "-DNDEBUG"
+        }
+    }
 }
