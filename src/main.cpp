@@ -6,7 +6,9 @@
 #include <imgui/backends/imgui_impl_glfw.h>
 #include <imgui/backends/imgui_impl_opengl3.h>
 #include <imgui/misc/cpp/imgui_stdlib.h>
+#include "sim/Sim.h"
 #include <memory>
+#include <chrono>
 
 struct InstanceData {
     glm::mat4 modelTransform;
@@ -27,6 +29,7 @@ int main()
         1200, 1200, "Ouroboros Simulator", false, false
     };
 
+    Ouroboros::Sim sim = Ouroboros::Sim();
     std::unique_ptr<Ouroboros::Window> window = std::make_unique<Ouroboros::Window>(spec);
 
 
@@ -147,6 +150,8 @@ int main()
     double m_LastTime;
     int m_nbFrames;
 
+    auto last = std::chrono::high_resolution_clock::now();
+    double accumulator = 0.0;
 
     while (window->isOpen())
     {  
@@ -160,6 +165,18 @@ int main()
             snprintf(m_Buffer2, sizeof(m_Buffer2), "%.0f fps\n", double(m_nbFrames));
             m_nbFrames = 0;
             m_LastTime += 1.0;
+        }
+        
+        auto now = std::chrono::high_resolution_clock::now();
+        std::chrono::duration<double> delta = now - last;
+        last = now;
+        
+        double frameTime = delta.count();
+        accumulator += frameTime; 
+
+        while (accumulator >= sim.config.simDt) {
+            sim.step(sim.config.simDt);
+            accumulator -= sim.config.simDt;
         }
 
         glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
