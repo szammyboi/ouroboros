@@ -18,7 +18,7 @@ target "Simulation"
 		"./vendor/glad/include",
 		"./vendor/spdlog/include",
 		--"./vendor/entt/single_include/",
-		--"./vendor/glm",
+		"./vendor/glm",
 		--"./vendor/stb",
 		"./vendor/imgui",
 		"./vendor",

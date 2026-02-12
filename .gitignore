@@ -33,3 +33,6 @@ build/
 *.user
 *.userosscache
 *.sln.docstates
+.vscode/
+
+imgui.ini
