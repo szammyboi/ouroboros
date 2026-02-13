@@ -1,7 +1,9 @@
 #include "rendering/icosphere.h"
 #include "sim/Sim.h"
 #include "window.h"
-#include "theme.h"
+#include "ui/ui.h"
+#include "ui/debug.h"
+#include "settings.h"
 
 #include <chrono>
 #include <memory>
@@ -13,12 +15,12 @@
 
 int main()
 {
-	const Ouroboros::WindowSpecification spec = { 800, 800, "Ouroboros Simulator",
+	const WindowSpecification spec = { 800, 800, "Ouroboros Simulator",
 		false, false };
 
-	Ouroboros::Sim sim = Ouroboros::Sim();
-	std::unique_ptr<Ouroboros::Window> window =
-	    std::make_unique<Ouroboros::Window>(spec);
+	Sim sim = Sim();
+	std::unique_ptr<Window> window =
+	    std::make_unique<Window>(spec);
 
 	auto last = std::chrono::high_resolution_clock::now();
 	double accumulator = 0.0;
@@ -27,22 +29,15 @@ int main()
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LESS);
 
-	IMGUI_CHECKVERSION();
-	ImGui::CreateContext();
-
-	ImFont* font = ImGui::GetIO().Fonts->AddFontFromFileTTF(
-	    "assets/fonts/SF-Pro-Text-Regular.otf");
-	font->Scale = 0.9;
-
-	const char* glsl_version = "#version 410";
-	setup_catppuccin_mocha_theme();
-
-	ImGui_ImplGlfw_InitForOpenGL(window->GetNativeWindow(), true);
-	ImGui_ImplOpenGL3_Init(glsl_version);
-
 	int lod_level = 0;
 
 	IcoSphere::InitRenderer();
+
+	Shared<View> ui = View::CreateView<UI>(*window);
+
+	bool polygonMode = true;
+
+	auto debug_view = ui->GetView<Debug>();
 
 	while (window->isOpen())
 	{
@@ -62,16 +57,9 @@ int main()
 		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		IcoSphere::Draw(lod_level, glm::vec3(0.0), 1.0);
+		IcoSphere::Draw(debug_view->GetLOD(), glm::vec3(0.0), 1.0);
 
-		ImGui_ImplOpenGL3_NewFrame();
-		ImGui_ImplGlfw_NewFrame();
-		ImGui::NewFrame();
-
-		ImGui::SliderInt("Subdivisions", &lod_level, 0, 5);
-
-		ImGui::Render();
-		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+		ui->OnUpdate();
 
 		glfwSwapBuffers(window->GetNativeWindow());
 		glfwPollEvents();
