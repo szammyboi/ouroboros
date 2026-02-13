@@ -1,6 +1,8 @@
 #include "window.h"
 
 #include "GLFW/glfw3.h"
+
+
 #include <iostream>
 
 Window::Window(const WindowSpecification& spec) : m_Specification(spec)
@@ -56,6 +58,11 @@ void Window::Initialize()
 	if (m_Specification.resizable == false)
 		glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
 
+	glfwWindowHint(GLFW_SAMPLES, 4);
+
+	//if (m_Specification.decorated == false)
+	//	glfwWindowHint(GLFW_DECORATED, GLFW_FALSE);
+
 	m_Window =
 	    glfwCreateWindow(m_Specification.width, m_Specification.height,
 	        m_Specification.title.c_str(),
@@ -68,6 +75,35 @@ void Window::Initialize()
 
 	glfwMakeContextCurrent(m_Window);
 
+#ifndef __APPLE__
+	m_HWND = glfwGetWin32Window(m_Window);
+	LONG style = GetWindowLong(m_HWND, GWL_STYLE);
+	style &= ~(WS_CAPTION);
+	style |= WS_THICKFRAME;
+
+	SetWindowLong(m_HWND, GWL_STYLE, style);
+	SetWindowPos(m_HWND, NULL, 0, 0, 0, 0,
+    SWP_FRAMECHANGED | SWP_NOMOVE | SWP_NOSIZE | SWP_NOZORDER);
+
+	DWM_WINDOW_CORNER_PREFERENCE preference = DWMWCP_ROUND;
+
+	COLORREF captionColor = RGB(28, 28, 40);
+
+	DwmSetWindowAttribute(
+		m_HWND,
+		DWMWA_CAPTION_COLOR,
+		&captionColor,
+		sizeof(captionColor)
+	);
+
+	DwmSetWindowAttribute(
+		m_HWND,
+		DWMWA_WINDOW_CORNER_PREFERENCE,
+		&preference,
+		sizeof(preference)
+	);
+#endif
+
 	int version = gladLoadGL(glfwGetProcAddress);
 	if (version == 0)
 	{
@@ -77,6 +113,9 @@ void Window::Initialize()
 	int fb_w, fb_h;
 	glfwGetFramebufferSize(m_Window, &fb_w, &fb_h);
 	glViewport(0, 0, fb_w, fb_h);
+	glEnable(GL_CULL_FACE);
+	glCullFace(GL_BACK);
+	glEnable(GL_MULTISAMPLE);  
 	//		glViewport(0, 0, m_Specification.width, m_Specification.height);
 
 	glfwSetFramebufferSizeCallback(m_Window, FrameBufferSizeCallback);

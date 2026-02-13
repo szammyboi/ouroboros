@@ -6,6 +6,7 @@
 
 #include "geometry/icosphere.h"
 #include "rendering/shader.h"
+#include "rendering/camera.h"
 
 namespace IcoSphere {
     const uint32_t MAX_SUBDIVISIONS = 5;
@@ -45,7 +46,7 @@ namespace IcoSphere {
     void InitRenderer();
     // FUTURE: INSTANCING
     //void StartBatch();
-    void Draw(int lod, glm::vec3 position, float scale);
+    void Draw(Camera& cam, int lod, glm::vec3 position, float scale);
     // FUTURE: INSTANCING
     //void EndBatch();
 }
