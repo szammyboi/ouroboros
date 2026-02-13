@@ -14,6 +14,7 @@ public:
 	Sim();
 	void step(float dt);
 	SimConfig config;
+	inline void add_body(Body new_body){ Bodies.push_back(new_body);}
 
 private:
 	std::vector<Body> Bodies;
