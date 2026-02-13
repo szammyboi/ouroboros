@@ -23,11 +23,13 @@ namespace Ouroboros {
 
 		GLFWwindow* GetNativeWindow() const { return m_Window; }
 		inline bool isOpen() { return !glfwWindowShouldClose(m_Window); }
+
 	private:
 		void Initialize();
 
 		static void WindowPositionCallback(GLFWwindow* window, int width, int height);
 		static void FrameBufferSizeCallback(GLFWwindow* window, int x, int y);
+
 	private:
 		GLFWwindow* m_Window;
 		WindowSpecification m_Specification;
