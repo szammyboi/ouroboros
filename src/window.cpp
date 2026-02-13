@@ -1,10 +1,10 @@
 #include "window.h"
 
 #include "GLFW/glfw3.h"
+#include <iostream>
 
 namespace Ouroboros {
-	Window::Window(const WindowSpecification& spec)
-	    : m_Specification(spec)
+	Window::Window(const WindowSpecification& spec) : m_Specification(spec)
 	{
 		Initialize();
 	}
@@ -15,7 +15,8 @@ namespace Ouroboros {
 		glfwTerminate();
 	}
 
-	void Window::FrameBufferSizeCallback(GLFWwindow* window, int width, int height)
+	void Window::FrameBufferSizeCallback(GLFWwindow* window, int width,
+	    int height)
 	{
 		glViewport(0, 0, width, height);
 	}
@@ -32,10 +33,10 @@ namespace Ouroboros {
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
 #else
-		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
 		glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-		//glfwWindowHint(GLFW_COCOA_RETINA_FRAMEBUFFER, GLFW_FALSE);
+		// glfwWindowHint(GLFW_COCOA_RETINA_FRAMEBUFFER, GLFW_FALSE);
 #endif
 		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
@@ -56,7 +57,10 @@ namespace Ouroboros {
 		if (m_Specification.resizable == false)
 			glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
 
-		m_Window = glfwCreateWindow(m_Specification.width, m_Specification.height, m_Specification.title.c_str(), m_Specification.fullscreen ? monitor : nullptr, nullptr);
+		m_Window =
+		    glfwCreateWindow(m_Specification.width, m_Specification.height,
+		        m_Specification.title.c_str(),
+		        m_Specification.fullscreen ? monitor : nullptr, nullptr);
 
 		if (m_Window == nullptr)
 		{
@@ -79,4 +83,4 @@ namespace Ouroboros {
 		glfwSetFramebufferSizeCallback(m_Window, FrameBufferSizeCallback);
 		glfwSetWindowPosCallback(m_Window, WindowPositionCallback);
 	}
-}
+} // namespace Ouroboros
