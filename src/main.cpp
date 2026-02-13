@@ -4,6 +4,7 @@
 #include "ui/ui.h"
 #include "ui/debug.h"
 #include "settings.h"
+#include "rendering/camera.h"
 
 #include <chrono>
 #include <memory>
@@ -16,7 +17,7 @@
 int main()
 {
 	const WindowSpecification spec = { 800, 800, "Ouroboros Simulator",
-		false, false };
+		false, false, true };
 
 	Sim sim = Sim();
 	std::unique_ptr<Window> window =
@@ -38,9 +39,18 @@ int main()
 	bool polygonMode = true;
 
 	auto debug_view = ui->GetView<Debug>();
+	
+	int fb_w, fb_h;
+	Camera cam;
 
 	while (window->isOpen())
 	{
+		glfwGetFramebufferSize(window->GetNativeWindow(), &fb_w, &fb_h);
+		cam.view = glm::lookAt(cam.position,
+		    glm::vec3(0.0f, 0.0f, 0.0f),
+		    glm::vec3(0.0f, 1.0f, 0.0f));
+		cam.projection = glm::perspective(glm::radians(45.0f), (float)fb_w / fb_h, 1.0f, 400.0f);
+
 		auto now = std::chrono::high_resolution_clock::now();
 		std::chrono::duration<double> delta = now - last;
 		last = now;
@@ -57,7 +67,7 @@ int main()
 		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		IcoSphere::Draw(debug_view->GetLOD(), glm::vec3(0.0), 1.0);
+		IcoSphere::Draw(cam, debug_view->GetLOD(), glm::vec3(0.0), 1.0);
 
 		ui->OnUpdate();
 

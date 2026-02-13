@@ -1,5 +1,7 @@
 #include "rendering/icosphere.h"
 
+#include "rendering/camera.h"
+
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
@@ -76,21 +78,15 @@ namespace IcoSphere {
 		// glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 0, instance_buffer);
 	}
 	// TO IMPLEMENT: SCALE
-	void Draw(int lod, glm::vec3 position, float scale)
+	void Draw(Camera& cam, int lod, glm::vec3 position, float scale)
 	{
-		glm::vec3 cam_pos = glm::vec3(0.0, 0.0, 3.0f);
-		glm::mat4 view = glm::lookAt(cam_pos,
-		    glm::vec3(0.0f, 0.0f, 0.0f),
-		    glm::vec3(0.0f, 1.0f, 0.0f));
-		glm::mat4 proj = glm::perspective(glm::radians(45.0f), 1200.0f / 1200.0f, 1.0f, 400.0f);
-
 		BufferEntry buffer = s_Renderer.lods[lod];
 		glm::mat4 model = glm::translate(glm::mat4(1.0), position);
 
 		glBindVertexArray(s_Renderer.vao);
 		s_Renderer.shader->SetUniformMatrix4f("model", model);
-		s_Renderer.shader->SetUniformMatrix4f("proj", proj);
-		s_Renderer.shader->SetUniformMatrix4f("view", view);
+		s_Renderer.shader->SetUniformMatrix4f("proj", cam.projection);
+		s_Renderer.shader->SetUniformMatrix4f("view", cam.view);
 		glDrawElementsBaseVertex(GL_TRIANGLES, buffer.index_count, GL_UNSIGNED_INT, (void*)buffer.index_byte_offset, buffer.vertex_index);
 		//glDrawElementsInstancedBaseVertexBaseInstance(GL_TRIANGLES, buffer.index_count, GL_UNSIGNED_INT, (void*)buffer.index_byte_offset, 1, buffer.vertex_index, 1);
 		s_Count++;
