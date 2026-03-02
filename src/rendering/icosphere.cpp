@@ -85,8 +85,8 @@ namespace IcoSphere {
 
 		glBindVertexArray(s_Renderer.vao);
 		s_Renderer.shader->SetUniformMatrix4f("model", model);
-		s_Renderer.shader->SetUniformMatrix4f("proj", cam.projection);
-		s_Renderer.shader->SetUniformMatrix4f("view", cam.view);
+		s_Renderer.shader->SetUniformMatrix4f("proj", cam.GetProjection());
+		s_Renderer.shader->SetUniformMatrix4f("view", cam.GetView());
 		glDrawElementsBaseVertex(GL_TRIANGLES, buffer.index_count, GL_UNSIGNED_INT, (void*)buffer.index_byte_offset, buffer.vertex_index);
 		//glDrawElementsInstancedBaseVertexBaseInstance(GL_TRIANGLES, buffer.index_count, GL_UNSIGNED_INT, (void*)buffer.index_byte_offset, 1, buffer.vertex_index, 1);
 		s_Count++;

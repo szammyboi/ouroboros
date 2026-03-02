@@ -15,7 +15,8 @@ namespace Ouroboros {
 
 		void Use() const;
 
-		//void SetUniform1i(const std::string& uniform, int x);
+		void SetUniform1i(const std::string& uniform, int x);
+		void SetUniform1f(const std::string& uniform, float x);
 		void SetUniform3f(const std::string& uniform, glm::vec3 vec);
 		void SetUniformMatrix4f(const std::string& uniform, glm::mat4 matrix);
 	private:
