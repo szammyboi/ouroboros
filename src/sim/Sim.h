@@ -1,3 +1,5 @@
+#pragma once
+
 #include "Body.h"
 #include <vector>
 

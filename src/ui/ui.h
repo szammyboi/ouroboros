@@ -1,7 +1,6 @@
 #pragma once
 
 #include "ui/view.h"
-#include "settings.h"
 
 class UI : public View
 {
@@ -13,6 +12,5 @@ public:
 	void OnUpdate() override;
 
 private:
-	RenderSettings m_RenderSettings;
 	bool m_DemoWindow = false;
 };

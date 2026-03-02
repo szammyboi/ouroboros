@@ -1,4 +1,5 @@
 #include "ui/menubar.h"
+#include "global.h"
 
 #ifndef __APPLE__
 	#define NOMINMAX
@@ -67,13 +68,15 @@ void MenuBar::OnUpdate()
 		{
 			if (ImGui::BeginMenu("Rendering"))
 			{
-				if (ImGui::MenuItem("Draw Outlines", "", &m_RenderSettings.drawOutlines))
+				if (ImGui::MenuItem("Draw Outlines", "", &Global::GetSettings().render.drawOutlines))
 				{
-					if (m_RenderSettings.drawOutlines)
+					if (Global::GetSettings().render.drawOutlines)
 						glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 					else
 						glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 				}
+
+				ImGui::MenuItem("Draw Octree", "", &Global::GetSettings().render.drawOctree);
 				ImGui::EndMenu();
 			}
 

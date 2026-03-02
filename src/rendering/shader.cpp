@@ -106,4 +106,20 @@ namespace Ouroboros {
 		int location = glGetUniformLocation(m_Program, uniform.c_str());
 		glUniform3fv(location, 1, glm::value_ptr(vec));
 	}
+
+	void Shader::SetUniform1i(const std::string& uniform, int x)
+	{
+		Use();
+
+		int location = glGetUniformLocation(m_Program, uniform.c_str());
+		glUniform1i(location, x);
+	}
+
+	void Shader::SetUniform1f(const std::string& uniform, float x)
+	{
+		Use();
+
+		int location = glGetUniformLocation(m_Program, uniform.c_str());
+		glUniform1f(location, x);
+	}
 }

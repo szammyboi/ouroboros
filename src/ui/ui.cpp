@@ -2,6 +2,7 @@
 #include "ui/menubar.h"
 #include "ui/debug.h"
 #include "ui/theme.h"
+#include "ui/topbar.h"
 
 void UI::OnAttach()
 {
@@ -17,8 +18,9 @@ void UI::OnAttach()
 	ImGui_ImplGlfw_InitForOpenGL(m_Window.GetNativeWindow(), true);
 	ImGui_ImplOpenGL3_Init(glsl_version);
 
-	AddView<MenuBar>(m_RenderSettings);
+	AddView<MenuBar>();
 	AddView<Debug>();
+	AddView<TopBar>();
 };
 
 void UI::OnDetach()
