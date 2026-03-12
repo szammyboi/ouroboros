@@ -46,7 +46,7 @@ namespace IcoSphere {
     void InitRenderer();
     // FUTURE: INSTANCING
     //void StartBatch();
-    void Draw(Camera& cam, int lod, glm::vec3 position, float scale);
+    void Draw(Camera& cam, int lod, glm::vec3 position, float scale, glm::vec3 color = glm::vec3(1.0f));
     // FUTURE: INSTANCING
     //void EndBatch();
 }

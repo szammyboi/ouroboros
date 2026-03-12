@@ -19,5 +19,5 @@ namespace Octree {
 	};
 
 	void InitRenderer();
-	void Draw(Camera& cam, glm::vec3 position, glm::vec3 scale, float count);
+	void Draw(Camera& cam, glm::vec3 position, glm::vec3 scale, glm::vec3 color = glm::vec3(1.0f), float count = 1.0f, bool priority = false);
 };

@@ -38,7 +38,7 @@ void Camera::Update()
 
     int fb_w, fb_h;
     glfwGetFramebufferSize(Global::GetWindow()->GetNativeWindow(), &fb_w, &fb_h);
-    proj = glm::perspective(glm::radians(45.0f), (float)fb_w / fb_h, 0.1f, 1000.0f);
+    proj = glm::perspective(glm::radians(45.0f), (float)fb_w / fb_h, 0.1f, 10000.0f);
 }
 
 void Camera::SetZoom(float z)
