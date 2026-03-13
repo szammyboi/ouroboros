@@ -46,17 +46,22 @@ namespace Octree {
 #endif
 	}
 
-	void Draw(Camera& cam, glm::vec3 position, glm::vec3 scale, float count)
+	void Draw(Camera& cam, glm::vec3 position, glm::vec3 scale, glm::vec3 color, float count, bool priority)
 	{
 		glm::mat4 model = glm::translate(glm::mat4(1.0), position);
 		model = glm::scale(model, scale);
 
+		if (priority)
+			glDisable(GL_DEPTH_TEST);
 		glBindVertexArray(s_Renderer.vao);
 		s_Renderer.shader->SetUniformMatrix4f("model", model);
 		s_Renderer.shader->SetUniformMatrix4f("proj", cam.GetProjection());
 		s_Renderer.shader->SetUniformMatrix4f("view", cam.GetView());
+		s_Renderer.shader->SetUniform3f("color", color);
 		s_Renderer.shader->SetUniform1f("count", count);
 		glDrawElements(GL_LINES, Cube::indices.size(), GL_UNSIGNED_INT, (void*)0);
+		if (priority)
+			glEnable(GL_DEPTH_TEST);
 		//glDrawElementsInstancedBaseVertexBaseInstance(GL_TRIANGLES, buffer.index_count, GL_UNSIGNED_INT, (void*)buffer.index_byte_offset, 1, buffer.vertex_index, 1);
 	}
 }

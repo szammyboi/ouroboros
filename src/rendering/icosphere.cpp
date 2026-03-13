@@ -78,15 +78,18 @@ namespace IcoSphere {
 		// glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 0, instance_buffer);
 	}
 	// TO IMPLEMENT: SCALE
-	void Draw(Camera& cam, int lod, glm::vec3 position, float scale)
+	void Draw(Camera& cam, int lod, glm::vec3 position, float scale, glm::vec3 color)
 	{
 		BufferEntry buffer = s_Renderer.lods[lod];
 		glm::mat4 model = glm::translate(glm::mat4(1.0), position);
+		model = glm::scale(model, glm::vec3(scale));
 
 		glBindVertexArray(s_Renderer.vao);
 		s_Renderer.shader->SetUniformMatrix4f("model", model);
 		s_Renderer.shader->SetUniformMatrix4f("proj", cam.GetProjection());
 		s_Renderer.shader->SetUniformMatrix4f("view", cam.GetView());
+		s_Renderer.shader->SetUniform3f("color", color);
+		s_Renderer.shader->SetUniform1i("lod", lod);
 		glDrawElementsBaseVertex(GL_TRIANGLES, buffer.index_count, GL_UNSIGNED_INT, (void*)buffer.index_byte_offset, buffer.vertex_index);
 		//glDrawElementsInstancedBaseVertexBaseInstance(GL_TRIANGLES, buffer.index_count, GL_UNSIGNED_INT, (void*)buffer.index_byte_offset, 1, buffer.vertex_index, 1);
 		s_Count++;

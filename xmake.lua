@@ -5,7 +5,7 @@ add_rules {
 }
 
 target "Simulation"
-	set_languages("c++17")
+	set_languages("c++20")
 	add_defines "GLFW_INCLUDE_NONE"
 	set_kind "binary"
 	add_files {
