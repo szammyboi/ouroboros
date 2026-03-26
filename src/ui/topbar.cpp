@@ -1,4 +1,5 @@
 #include "ui/topbar.h"
+#include "fa.h"
 
 void TopBar::OnAttach()
 {
@@ -25,9 +26,9 @@ void TopBar::OnUpdate()
     ImVec4 color = {1.0, 0.0, 0.0, 1.0};
 
     if (frametime <= 6.94)
-            color = {0.0, 1.0, 0.0, 1.0};
+            color = Catppuccin::green;
     else if (frametime <= 16.67)
-            color = {0.0, 1.0, 1.0, 1.0};
+            color = Catppuccin::red;
 
 
 	static int location = 3;

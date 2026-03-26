@@ -40,7 +40,6 @@ void CursorPosCallback(GLFWwindow*, double x, double y)
     Global::GetCamera().OnMouseMove((float)x, (float)y);
 }
 
-
 int main()
 {
 	const WindowSpecification spec = { 800, 800, "Ouroboros Simulator",
@@ -75,6 +74,7 @@ int main()
 
 	Body sun;
 	sun.mass = 1.989e6f;
+	sun.emission = glm::vec4(0.97f, 0.84f, 0.1f, 1.0f);
 	sim.add_body(sun);
 
 	auto add_planet = [&](float mass, float radius, float distance, float angle = 0.0f)
@@ -116,6 +116,8 @@ int main()
 		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+		int i = 0;
+		IcoSphere::StartBatch();
 		for (Body& body : sim.Bodies) {
 			glm::mat4 model = glm::translate(glm::mat4(1.0), body.loc);
 			model = glm::scale(model, glm::vec3(0.1));
@@ -123,14 +125,18 @@ int main()
 			float distance = glm::distance(Global::GetCamera().position, body.loc);
 			int lodLevel = static_cast<int>(glm::floor(log2(distance / 5.0f + 1e-6f)));
 			lodLevel = 5 - glm::clamp(lodLevel, 0, 5);
-			IcoSphere::Draw(Global::GetCamera(), lodLevel, body.loc, 0.1);
+			
+			if (body.emission.a != 0.0f)
+				IcoSphere::SubmitLight(model, body.loc, body.emission);
+			else
+				IcoSphere::Submit(model, glm::vec4(1.0));
 		}
+		IcoSphere::EndBatch(Global::GetCamera());
 
-		if (Global::GetSettings().render.drawOctree) {
-			sim.m_Tree->draw(Global::GetCamera(), false);
-			sim.m_Tree->draw(Global::GetCamera(), true);
-			//Octree::Draw(Global::GetCamera(), sim.m_Tree->pos, sim.m_Tree->halfExtent * 2.0f, glm::vec3(1.0f));
-		}
+		Octree::StartBatch();
+		if (Global::GetSettings().render.drawOctree)
+			Octree::Submit(sim.m_Tree);
+		Octree::EndBatch(Global::GetCamera());
 			
 		ui->OnUpdate();
 

@@ -1,4 +1,5 @@
 #include "ui/debug.h"
+#include "global.h"
 
 void Debug::OnAttach()
 {
@@ -44,6 +45,14 @@ void Debug::OnUpdate()
 					m_LOD = std::min(5, std::max(0, m_LOD));
 				}
 			}
+
+			ImGui::TableNextRow();
+				ImGui::TableNextColumn();
+				ImGui::AlignTextToFramePadding();
+				ImGui::Text("Gravity: ");
+				ImGui::TableNextColumn();
+				ImGui::SetNextItemWidth(100);
+				ImGui::SliderFloat("### g", &Global::GetSim().config.G, 0.0, 0.001f, "%.7f");
 			ImGui::EndTable();
 		}
 

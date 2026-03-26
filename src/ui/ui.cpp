@@ -3,13 +3,21 @@
 #include "ui/debug.h"
 #include "ui/theme.h"
 #include "ui/topbar.h"
+#include "ui/fa.h"
 
 void UI::OnAttach()
 {
 	IMGUI_CHECKVERSION();
 	ImGui::CreateContext();
 
-	ImFont* font = ImGui::GetIO().Fonts->AddFontFromFileTTF("assets/fonts/SF-Pro-Text-Regular.otf");
+	ImFont* font = ImGui::GetIO().Fonts->AddFontFromFileTTF("assets/fonts/SF-Pro-Text-Regular.otf", 20.0f);
+	font->Scale = 0.9;
+
+	ImFontConfig icons_config;
+	icons_config.MergeMode = true;
+	icons_config.PixelSnapH = true;
+	static const ImWchar icon_ranges[] = { ICON_MIN_FA, ICON_MAX_FA, 0 };
+	font = ImGui::GetIO().Fonts->AddFontFromFileTTF("assets/fonts/solid.otf", 16.0f, &icons_config, icon_ranges);
 	font->Scale = 0.9;
 
 	const char* glsl_version = "#version 410";

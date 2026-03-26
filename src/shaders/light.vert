@@ -11,7 +11,6 @@ out vec3 vertexNormal;
 
 flat out int lodOut;
 flat out float vertexCount;
-flat out int instanceID;
 
 uniform mat4 proj;
 uniform mat4 view;
@@ -23,20 +22,20 @@ uniform int lod;
 uniform vec3 lightPos;
 uniform vec3 lightColor;
 
-struct InstanceData
+struct Light
 {
 	mat4 transform;
+	vec4 position;
 	vec4 color;
 };
 
-layout(binding = 0, std430) readonly buffer instanceSSBO {
-	InstanceData instances[];
+layout(binding = 1, std430) readonly buffer instanceSSBO {
+	Light instances[];
 };
 
 void main()
 {
-    InstanceData instance = instances[gl_BaseInstance + gl_InstanceID];
-    instanceID = gl_BaseInstance + gl_InstanceID;
+    Light instance = instances[gl_BaseInstance + gl_InstanceID];
    // vec3 normal = normalize(aPos);
 
     gl_Position =  proj * view * instance.transform * vec4(aPos, 1.0);

@@ -26,6 +26,9 @@ Sim::Sim()
 
 void Sim::step(float dt)
 {
+	if (!m_Playing)
+		return;
+		
 	m_Tree = rebuild_tree(m_Arena, m_Tree, Bodies);
 
 	/*for (Body& body : Bodies) {
