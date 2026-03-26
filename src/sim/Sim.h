@@ -9,7 +9,7 @@
 // Put more constants here
 struct SimConfig
 {
-	double G { 0.0000001 }; // Nm^2/kg^2
+	float G { 0.0000001 }; // Nm^2/kg^2
 	double simDt { 1.0 / 120.0 };
 };
 
@@ -23,9 +23,18 @@ public:
 		Bodies.push_back(new_body); 
 		m_Tree->insert(m_Arena, &Bodies[Bodies.size()-1]);
 	}
+
+	void Toggle() {
+		m_Playing = !m_Playing;
+	}
+
+	bool isPlaying() {
+		return m_Playing;
+	}
 public:
 	Arena m_Arena;
 	std::vector<Box*> boxes;
 	std::vector<Body> Bodies;
 	Box* m_Tree;
+	bool m_Playing = true;
 };

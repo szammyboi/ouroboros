@@ -63,12 +63,13 @@ void Box::insert(Arena& arena, const Body* newobj)
     children[findOctant(newobj->loc)]->insert(arena, newobj);
 }
 
+
 void Box::draw(Camera& cam, bool priority)
 {
-    if (priority && object != nullptr)
-        Octree::Draw(cam, pos, halfExtent * 2.0f, glm::vec3(0.0f, 1.0f, 0.0f), 1.0, true);
-    else if (!priority)
-        Octree::Draw(cam, pos, halfExtent * 2.0f, glm::vec3(0.3f), 1.0, true);
+   // if (priority && object != nullptr)
+        //Octree::Draw(cam, pos, halfExtent * 2.0f, glm::vec3(0.0f, 1.0f, 0.0f), 1.0, true);
+    //else if (!priority)
+        //Octree::Draw(cam, pos, halfExtent * 2.0f, glm::vec3(0.3f), 1.0, true);
 
     //IcoSphere::Draw(cam, 0, com, 1, glm::vec3(1.0f, 0.0f, 0.0f));
 

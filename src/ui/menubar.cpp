@@ -1,5 +1,6 @@
 #include "ui/menubar.h"
 #include "global.h"
+#include "ui/fa.h"
 
 #ifndef __APPLE__
 	#define NOMINMAX
@@ -64,10 +65,24 @@ void MenuBar::OnUpdate()
 #endif
 
 		ImGui::AlignTextToFramePadding();
-		if (ImGui::BeginMenu("Settings"))
+
+		ImGui::PushStyleColor(ImGuiCol_Text, Catppuccin::red);
+		if (ImGui::MenuItem(ICON_FA_XMARK)) {
+			glfwSetWindowShouldClose(m_Window.GetNativeWindow(), GLFW_TRUE);
+		}
+		ImGui::PopStyleColor();
+
+		ImGui::PushStyleColor(ImGuiCol_Text, Global::GetSim().isPlaying() ? Catppuccin::green : Catppuccin::text);
+		if (ImGui::MenuItem(Global::GetSim().isPlaying() ? ICON_FA_PLAY : ICON_FA_PAUSE)) {
+			Global::GetSim().Toggle();
+		}
+		ImGui::PopStyleColor();
+
+		if (ImGui::BeginMenu(ICON_FA_GEAR))
 		{
 			if (ImGui::BeginMenu("Rendering"))
 			{
+				ImGui::PushItemFlag(ImGuiItemFlags_AutoClosePopups, false);
 				if (ImGui::MenuItem("Draw Outlines", "", &Global::GetSettings().render.drawOutlines))
 				{
 					if (Global::GetSettings().render.drawOutlines)
@@ -77,6 +92,10 @@ void MenuBar::OnUpdate()
 				}
 
 				ImGui::MenuItem("Draw Octree", "", &Global::GetSettings().render.drawOctree);
+				ImGui::MenuItem("Draw Planets", "", &Global::GetSettings().render.drawPlanets);
+				ImGui::MenuItem("Draw Stars", "", &Global::GetSettings().render.drawStars);
+
+				ImGui::PopItemFlag();
 				ImGui::EndMenu();
 			}
 
@@ -87,6 +106,8 @@ void MenuBar::OnUpdate()
 
 			ImGui::EndMenu();
 		}
+		
+				
 		ImGui::EndMainMenuBar();
 	}
 	//ImGui::PopStyleVar(2);

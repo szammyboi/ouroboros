@@ -10,6 +10,8 @@ struct Settings {
     struct Render {
         bool drawOutlines = true;
         bool drawOctree = true;
+        bool drawPlanets = true;
+        bool drawStars = true;
     } render;
 
     bool close = false;
