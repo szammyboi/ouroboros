@@ -153,6 +153,7 @@ int main()
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		int i = 0;
+		int selectedBody = Global::GetSettings().selectedBody;
 		IcoSphere::StartBatch();
 		for (Body& body : sim.Bodies) {
 			glm::mat4 model = glm::translate(glm::mat4(1.0), body.loc);
@@ -165,7 +166,8 @@ int main()
 			if (body.emission.a != 0.0f)
 				IcoSphere::SubmitLight(model, body.loc, body.emission);
 			else
-				IcoSphere::Submit(model, glm::vec4(1.0));
+				IcoSphere::Submit(model, i == selectedBody ? glm::vec4(0.0f, 1.0f, 1.0f, 1.0f) : glm::vec4(1.0));
+			i++;
 		}
 		IcoSphere::EndBatch(Global::GetCamera());
 
