@@ -5,6 +5,7 @@
 #include "ui/ui.h"
 #include "ui/debug.h"
 #include "rendering/camera.h"
+#include  "spdlog/spdlog.h"
 
 #include "global.h"
 
@@ -33,6 +34,41 @@ void MouseButtonCallback(GLFWwindow*, int button, int action, int)
 	if (io.WantCaptureMouse)
 		return;
     Global::GetCamera().OnMouseButton(button, action);
+
+	if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS) {
+		Camera& cam = Global::GetCamera();
+		auto win = Global::GetWindow();
+		int fb_w, fb_h;
+		glfwGetFramebufferSize(win->GetNativeWindow(), &fb_w, &fb_h);
+
+		float ndcX = (2.0f * cam.lastMouseX) / fb_w - 1.0f;
+		float ndcY = 1.0f - (2.0f * cam.lastMouseY) / fb_h;
+
+		glm::vec4 rayEye = glm::inverse(cam.GetProjection()) * glm::vec4(ndcX, ndcY, -1.0f, 1.0f);
+		rayEye = glm::vec4(rayEye.x, rayEye.y, -1.0f, 0.0f);
+		glm::vec3 rayDir = glm::normalize(glm::vec3(glm::inverse(cam.GetView()) * rayEye));
+		glm::vec3 rayOrig = cam.position;
+
+		Sim& sim = Global::GetSim();
+		int closestIndex = -1;
+		float closestT = FLT_MAX;
+		const float radius = 0.1f;
+
+		for (int i = 0; i < (int)sim.Bodies.size(); i++) {
+			glm::vec3 oc = rayOrig - sim.Bodies[i].loc;
+			float b = glm::dot(oc, rayDir);
+			float c = glm::dot(oc, oc) - radius * radius;
+			float disc = b * b - c;
+			if (disc < 0) continue;
+			float t = -b - sqrt(disc);
+			if (t > 0 && t < closestT) {
+				closestT = t;
+				closestIndex = i;
+			}
+		}
+		Global::GetSettings().selectedBody = closestIndex;
+		spdlog::info("closest: {}", closestIndex);
+	}
 }
 
 void CursorPosCallback(GLFWwindow*, double x, double y)
