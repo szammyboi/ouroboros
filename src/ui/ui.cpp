@@ -4,6 +4,7 @@
 #include "ui/theme.h"
 #include "ui/topbar.h"
 #include "ui/fa.h"
+#include "ui/bodyInfo.h"
 
 void UI::OnAttach()
 {
@@ -29,6 +30,7 @@ void UI::OnAttach()
 	AddView<MenuBar>();
 	AddView<Debug>();
 	AddView<TopBar>();
+	AddView<BodyInfo>();
 };
 
 void UI::OnDetach()

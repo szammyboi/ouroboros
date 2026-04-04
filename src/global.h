@@ -15,6 +15,7 @@ struct Settings {
     } render;
 
     bool close = false;
+    int selectedBody = -1;
 };
 
 class Global {
