@@ -135,6 +135,10 @@ int main()
 		
 	while (window->isOpen())
 	{
+		Sim& sim = Global::GetSim();
+		int sel = Global::GetSettings().selectedBody;
+		if(sel >= 0 && sel < (int)sim.Bodies.size())
+			Global::GetCamera().target = sim.Bodies[sel].loc;
 		Global::GetCamera().Update();
 		auto now = std::chrono::high_resolution_clock::now();
 		std::chrono::duration<double> delta = now - last;
