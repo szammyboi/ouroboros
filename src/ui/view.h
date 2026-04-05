@@ -14,6 +14,9 @@
 #include "window.h"
 #include "mem.h"
 
+template <typename>
+inline constexpr bool always_false_v = false;
+
 class View
 {
 public:
@@ -111,7 +114,7 @@ public:
 			else if constexpr (std::is_invocable_v<Callback>)
 				func();
 			else
-				static_assert(false, "Invalid Slot Callback Signature");
+				static_assert(always_false_v<Callback>, "Invalid Slot Callback Signature");
 
 			view->OnUpdate();
 			i++;

@@ -47,15 +47,18 @@ vec3 CalcPointLight(Light light, vec3 normal, vec3 fragPos)
 	ambient *= attenuation;
 	diffuse *= attenuation;
 
-	return (ambient + diffuse);
+	return (diffuse);
 }
 
 void main()
 {
 	vec3 norm = normalize(vertexNormal);
 
-	vec3 res = vec3(0.0, 0.0, 0.0);
-	for(int i = 0; i < lightCount; i++)
+	// encoding light enable into vertexColor.a
+	// so if vertexColor.a == 0.0, the lighting will not be applied
+	
+	vec3 res = vec3(1.0 - vertexColor.a, 1.0 - vertexColor.a, 1.0 - vertexColor.a);
+	for(int i = 0; i < lightCount * vertexColor.a; i++)
 		res += CalcPointLight(light_instances[i], norm, vertexPos);
 	res *= vertexColor.xyz;
     //FragColor = vec4(c, 1.0);

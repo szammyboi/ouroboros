@@ -66,8 +66,14 @@ void MouseButtonCallback(GLFWwindow*, int button, int action, int)
 				closestIndex = i;
 			}
 		}
-		Global::GetSettings().selectedBody = closestIndex;
+		
+		if (closestIndex != -1 || Global::GetSettings().selectedBody == -1)
+			Global::GetSettings().selectedBody = closestIndex;
 		spdlog::info("closest: {}", closestIndex);
+	}
+
+	if (button == GLFW_MOUSE_BUTTON_RIGHT && action == GLFW_PRESS) {
+		Global::GetSettings().selectedBody = -1;
 	}
 }
 
@@ -150,23 +156,28 @@ int main()
 		}
 
 		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
 		int i = 0;
 		int selectedBody = Global::GetSettings().selectedBody;
 		IcoSphere::StartBatch();
 		for (Body& body : sim.Bodies) {
 			glm::mat4 model = glm::translate(glm::mat4(1.0), body.loc);
+			glm::mat4 model2 = glm::translate(glm::mat4(1.0), body.loc);
 			model = glm::scale(model, glm::vec3(0.1));
+			model2 = glm::scale(model2, glm::vec3(0.12));
 
 			float distance = glm::distance(Global::GetCamera().position, body.loc);
 			int lodLevel = static_cast<int>(glm::floor(log2(distance / 5.0f + 1e-6f)));
 			lodLevel = 5 - glm::clamp(lodLevel, 0, 5);
-			
+
+			if (i == selectedBody)
+				IcoSphere::Submit(model2, glm::vec4(0.0f, 1.0f, 1.0f, 0.0f));
+
 			if (body.emission.a != 0.0f)
-				IcoSphere::SubmitLight(model, body.loc, body.emission);
+				IcoSphere::SubmitLight(model, body.loc,  body.emission);
 			else
-				IcoSphere::Submit(model, i == selectedBody ? glm::vec4(0.0f, 1.0f, 1.0f, 1.0f) : glm::vec4(1.0));
+				IcoSphere::Submit(model, glm::vec4(1.0));
 			i++;
 		}
 		IcoSphere::EndBatch(Global::GetCamera());
