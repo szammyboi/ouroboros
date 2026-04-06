@@ -52,74 +52,81 @@ std::string ReadFromFile(const std::string& path)
 	return res;
 }
 
-namespace Ouroboros {
-	Shader::Shader(const std::string& vertex_path, const std::string& fragment_path)
-	{
-		m_Program = glCreateProgram();
 
-		m_VertexSource = ReadFromFile(vertex_path);
-		m_FragmentSource = ReadFromFile(fragment_path);
+Shader::Shader(const std::string& vertex_path, const std::string& fragment_path)
+{
+	m_Program = glCreateProgram();
 
-		unsigned vertex = glCreateShader(GL_VERTEX_SHADER);
+	m_VertexSource = ReadFromFile(vertex_path);
+	m_FragmentSource = ReadFromFile(fragment_path);
 
-		unsigned fragment = glCreateShader(GL_FRAGMENT_SHADER);
+	unsigned vertex = glCreateShader(GL_VERTEX_SHADER);
 
-		const char* v_ref = m_VertexSource.c_str();
-		const char* f_ref = m_FragmentSource.c_str();
+	unsigned fragment = glCreateShader(GL_FRAGMENT_SHADER);
 
-		glShaderSource(vertex, 1, &v_ref, NULL);
-		glShaderSource(fragment, 1, &f_ref, NULL);
+	const char* v_ref = m_VertexSource.c_str();
+	const char* f_ref = m_FragmentSource.c_str();
 
-		glCompileShader(vertex);
-		VerifyShader(vertex, vertex_path);
-		
-		glCompileShader(fragment);
-		VerifyShader(fragment, fragment_path);
+	glShaderSource(vertex, 1, &v_ref, NULL);
+	glShaderSource(fragment, 1, &f_ref, NULL);
 
-		glAttachShader(m_Program, vertex);
-		glAttachShader(m_Program, fragment);
-		glLinkProgram(m_Program);
+	glCompileShader(vertex);
+	VerifyShader(vertex, vertex_path);
+	
+	glCompileShader(fragment);
+	VerifyShader(fragment, fragment_path);
 
-		VerifyShaderProgram(m_Program, vertex_path, fragment_path);
+	glAttachShader(m_Program, vertex);
+	glAttachShader(m_Program, fragment);
+	glLinkProgram(m_Program);
 
-		glDeleteShader(vertex);
-		glDeleteShader(fragment);
-	}
+	VerifyShaderProgram(m_Program, vertex_path, fragment_path);
 
-	void Shader::Use() const
-	{
-		glUseProgram(m_Program);
-	}
+	glDeleteShader(vertex);
+	glDeleteShader(fragment);
+}
 
-	void Shader::SetUniformMatrix4f(const std::string& uniform, glm::mat4 matrix)
-	{
-		Use();
+void Shader::Use() const
+{
+	glUseProgram(m_Program);
+}
 
-		int location = glGetUniformLocation(m_Program, uniform.c_str());
-		glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(matrix));
-	}
+void Shader::SetUniformMatrix4f(const std::string& uniform, glm::mat4 matrix)
+{
+	Use();
 
-	void Shader::SetUniform3f(const std::string& uniform, glm::vec3 vec)
-	{
-		Use();
+	int location = glGetUniformLocation(m_Program, uniform.c_str());
+	glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(matrix));
+}
 
-		int location = glGetUniformLocation(m_Program, uniform.c_str());
-		glUniform3fv(location, 1, glm::value_ptr(vec));
-	}
+void Shader::SetUniform3f(const std::string& uniform, glm::vec3 vec)
+{
+	Use();
 
-	void Shader::SetUniform1i(const std::string& uniform, int x)
-	{
-		Use();
+	int location = glGetUniformLocation(m_Program, uniform.c_str());
+	glUniform3fv(location, 1, glm::value_ptr(vec));
+}
 
-		int location = glGetUniformLocation(m_Program, uniform.c_str());
-		glUniform1i(location, x);
-	}
+void Shader::SetUniform1i(const std::string& uniform, int x)
+{
+	Use();
 
-	void Shader::SetUniform1f(const std::string& uniform, float x)
-	{
-		Use();
+	int location = glGetUniformLocation(m_Program, uniform.c_str());
+	glUniform1i(location, x);
+}
 
-		int location = glGetUniformLocation(m_Program, uniform.c_str());
-		glUniform1f(location, x);
-	}
+void Shader::SetUniform1f(const std::string& uniform, float x)
+{
+	Use();
+
+	int location = glGetUniformLocation(m_Program, uniform.c_str());
+	glUniform1f(location, x);
+}
+
+void Shader::SetUniform2f(const std::string& uniform, glm::vec2 vec)
+{
+	Use();
+
+	int location = glGetUniformLocation(m_Program, uniform.c_str());
+	glUniform2fv(location, 1, glm::value_ptr(vec));
 }

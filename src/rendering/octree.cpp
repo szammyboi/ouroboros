@@ -14,7 +14,7 @@ namespace Octree {
 
 	void InitRenderer()
 	{
-		s_Renderer.shader = new Ouroboros::Shader("src/shaders/octree.vert", "src/shaders/octree.frag");
+		s_Renderer.shader = new Shader("src/shaders/octree.vert", "src/shaders/octree.frag");
 
 		s_Renderer.instance_data = new std::byte[MAX_INSTANCE_BUFFER_SIZE];
 

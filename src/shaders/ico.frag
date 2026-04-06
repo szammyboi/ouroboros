@@ -3,7 +3,8 @@
 #extension GL_ARB_bindless_texture : require
 #extension GL_ARB_gpu_shader_int64 : enable
 
-out vec4 FragColor;
+layout (location = 0) out vec4 FragColor;
+layout (location = 1) out vec4 BrightColor;
   
 in vec4 vertexColor;
 in vec3 vertexPos;
@@ -63,6 +64,7 @@ void main()
 	res *= vertexColor.xyz;
     //FragColor = vec4(c, 1.0);
 	FragColor = vec4(res, 1.0);
+	BrightColor = vec4(0.0, 0.0, 0.0, 0.0);
 	//FragColor = vec4(1.0);
 	//FragColor = vec4(normalize(vertexNormal) * 0.5 + 0.5, 1.0);
 	//FragColor = vec4(vertexPos * 0.5 + 0.5, 1.0);

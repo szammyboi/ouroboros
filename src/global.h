@@ -8,11 +8,18 @@
 
 struct Settings {
     struct Render {
-        bool drawOutlines = true;
-        bool drawOctree = true;
+        bool drawOutlines = false;
+        bool drawOctree = false;
         bool drawPlanets = true;
         bool drawStars = true;
     } render;
+
+    struct PostProcessing {
+        float exposure = 3.5;
+        float sqrexposure = 0.5;
+        float gamma = 1.3;
+        float bloom = 10.0;
+    } postprocessing;
 
     bool close = false;
     int selectedBody = -1;
@@ -28,6 +35,9 @@ public:
 
     static Settings& GetSettings()
     { return Get().m_Settings; }
+
+    static Settings::PostProcessing& GetPostProcessing()
+    { return Get().m_Settings.postprocessing; }
 
     static std::shared_ptr<Window> GetWindow()
     { return Get().m_Window; }

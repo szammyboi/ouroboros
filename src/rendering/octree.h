@@ -28,7 +28,7 @@ namespace Octree {
         std::byte* instance_ptr;
         uint32_t instance_offset;
 
-		Ouroboros::Shader* shader;
+		Shader* shader;
 	};
 
 	void InitRenderer();

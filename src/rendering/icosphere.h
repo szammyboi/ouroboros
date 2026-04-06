@@ -7,6 +7,7 @@
 #include "geometry/icosphere.h"
 #include "rendering/shader.h"
 #include "rendering/camera.h"
+#include "rendering/pass.h"
 
 // max isntance buffer needs to be dynamic based on hardware
 namespace IcoSphere {
@@ -55,14 +56,20 @@ namespace IcoSphere {
 
         BufferEntry lods[MAX_SUBDIVISIONS+1];
 
-       
+    
+        Shader* shader;
+        Shader* light_shader;
+        Shader* pass1;
+        Shader* pass2;
+        Shader* finalpass;
+        Shader* grain;
 
-        Ouroboros::Shader* shader;
-        Ouroboros::Shader* light_shader;
+        RenderSequence* postprocessing;
     };
 
-    void InitRenderer();
-
+    void InitRenderer(glm::vec2 resolution);
+    void Resize(glm::vec2 resolution);
+    
     void StartBatch();
     void Submit(glm::mat4 model, glm::vec4 color);
     void SubmitLight(glm::mat4 model, glm::vec3 position, glm::vec4 color);

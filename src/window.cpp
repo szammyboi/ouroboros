@@ -1,6 +1,7 @@
 #include "window.h"
 
 #include "GLFW/glfw3.h"
+#include "rendering/icosphere.h"
 
 
 #include <iostream>
@@ -20,6 +21,7 @@ void Window::FrameBufferSizeCallback(GLFWwindow* window, int width,
     int height)
 {
 	glViewport(0, 0, width, height);
+	IcoSphere::Resize({width, height});
 }
 
 void Window::WindowPositionCallback(GLFWwindow* window, int width, int height)
@@ -113,8 +115,8 @@ void Window::Initialize()
 	int fb_w, fb_h;
 	glfwGetFramebufferSize(m_Window, &fb_w, &fb_h);
 	glViewport(0, 0, fb_w, fb_h);
-	glEnable(GL_CULL_FACE);
-	glCullFace(GL_BACK);
+	//glEnable(GL_CULL_FACE);
+	//glCullFace(GL_BACK);
 	glEnable(GL_MULTISAMPLE);  
 	//		glViewport(0, 0, m_Specification.width, m_Specification.height);
 

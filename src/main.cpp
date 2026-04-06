@@ -99,13 +99,13 @@ int main()
 	auto last = std::chrono::high_resolution_clock::now();
 	double accumulator = 0.0;
 
-	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LESS);
 
 	int lod_level = 0;
 
-	IcoSphere::InitRenderer();
+	IcoSphere::InitRenderer({800, 800});
 	Octree::InitRenderer();
 
 	Shared<View> ui = View::CreateView<UI>(*window);
@@ -181,7 +181,7 @@ int main()
 			if (body.emission.a != 0.0f)
 				IcoSphere::SubmitLight(model, body.loc,  body.emission);
 			else
-				IcoSphere::Submit(model, glm::vec4(1.0));
+				IcoSphere::Submit(model, glm::vec4(0.2));
 			i++;
 		}
 		IcoSphere::EndBatch(Global::GetCamera());
