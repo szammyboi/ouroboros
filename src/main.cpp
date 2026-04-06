@@ -167,16 +167,11 @@ int main()
 		IcoSphere::StartBatch();
 		for (Body& body : sim.Bodies) {
 			glm::mat4 model = glm::translate(glm::mat4(1.0), body.loc);
-			glm::mat4 model2 = glm::translate(glm::mat4(1.0), body.loc);
 			model = glm::scale(model, glm::vec3(0.1));
-			model2 = glm::scale(model2, glm::vec3(0.12));
 
 			float distance = glm::distance(Global::GetCamera().position, body.loc);
 			int lodLevel = static_cast<int>(glm::floor(log2(distance / 5.0f + 1e-6f)));
 			lodLevel = 5 - glm::clamp(lodLevel, 0, 5);
-
-			if (i == selectedBody)
-				IcoSphere::Submit(model2, glm::vec4(0.0f, 1.0f, 1.0f, 0.0f));
 
 			if (body.emission.a != 0.0f)
 				IcoSphere::SubmitLight(model, body.loc,  body.emission);
