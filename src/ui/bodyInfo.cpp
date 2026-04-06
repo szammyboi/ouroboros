@@ -15,10 +15,10 @@ void BodyInfo::OnUpdate(){
 
     ImGui::Text("Body #%d", idx);
     ImGui::Separator();
-    ImGui::Text("Mass:     %.3e", body.mass);
-    ImGui::Text("Position: %.2f  %.2f  %.2f", body.loc.x, body.loc.y, body.loc.z);
-    ImGui::Text("Velocity: %.2f  %.2f  %.2f", body.vel.x, body.vel.y, body.vel.z);
-    ImGui::Text("Accel:    %.2f  %.2f  %.2f", body.acc.x, body.acc.y, body.acc.z);
+    ImGui::Text("Mass:     %.3e Yg", body.mass);
+    ImGui::Text("Position: %.2f  %.2f  %.2f  (AU)", body.loc.x, body.loc.y, body.loc.z);
+    ImGui::Text("Velocity: %.2f  %.2f  %.2f  (AU/s)", body.vel.x, body.vel.y, body.vel.z);
+    ImGui::Text("Accel:    %.2f  %.2f  %.2f  (AU/s²)", body.acc.x, body.acc.y, body.acc.z);
 
     ImGui::End();
 }
