@@ -47,6 +47,38 @@ void Debug::OnUpdate()
 			}
 
 			ImGui::TableNextRow();
+                ImGui::TableNextColumn();
+                ImGui::AlignTextToFramePadding();
+                ImGui::Text("Bloom: ");
+                ImGui::TableNextColumn();
+                ImGui::SetNextItemWidth(100);
+                ImGui::SliderFloat("### bloom", &Global::GetPostProcessing().bloom, 0.0, 10.0f);
+
+				ImGui::TableNextRow();
+                ImGui::TableNextColumn();
+                ImGui::AlignTextToFramePadding();
+                ImGui::Text("Exposure: ");
+                ImGui::TableNextColumn();
+                ImGui::SetNextItemWidth(100);
+                ImGui::SliderFloat("### exp", &Global::GetPostProcessing().exposure, 0.0, 5.0f);
+
+			 ImGui::TableNextRow();
+                ImGui::TableNextColumn();
+                ImGui::AlignTextToFramePadding();
+                ImGui::Text("SqrExposure: ");
+                ImGui::TableNextColumn();
+                ImGui::SetNextItemWidth(100);
+                ImGui::SliderFloat("### sqre", &Global::GetPostProcessing().sqrexposure, 0.0, 5.0f);
+
+				 ImGui::TableNextRow();
+                ImGui::TableNextColumn();
+                ImGui::AlignTextToFramePadding();
+                ImGui::Text("Gamma: ");
+                ImGui::TableNextColumn();
+                ImGui::SetNextItemWidth(100);
+                ImGui::SliderFloat("### gamma", &Global::GetPostProcessing().gamma, 0.0, 5.0f);
+
+			ImGui::TableNextRow();
 				ImGui::TableNextColumn();
 				ImGui::AlignTextToFramePadding();
 				ImGui::Text("Gravity: ");
