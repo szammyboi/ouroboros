@@ -42,7 +42,7 @@ void main()
 	else if (lodOut == 4) c = vec3(0.0, 0.0, 1.0);
 	else c = vec3(0.5, 0.0, 0.5);
     //FragColor = vec4(c, 1.0);
-	FragColor = vec4(vertexColor);
+	FragColor = vec4(vertexColor) * 5.0;
 	BrightColor = vec4(vertexColor);
 	//FragColor = vec4(normalize(vertexNormal) * 0.5 + 0.5, 1.0);
 	//FragColor = vec4(vertexPos * 0.5 + 0.5, 1.0);

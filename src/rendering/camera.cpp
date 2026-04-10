@@ -38,7 +38,9 @@ void Camera::Update()
 
     int fb_w, fb_h;
     glfwGetFramebufferSize(Global::GetWindow()->GetNativeWindow(), &fb_w, &fb_h);
-    proj = glm::perspective(glm::radians(45.0f), (float)fb_w / fb_h, 0.1f, 10000.0f);
+    //proj = glm::perspective(glm::radians(45.0f), (float)fb_w / fb_h, 0.1f, 10000.0f);
+    proj = glm::perspective(glm::radians(0.033f), (float)fb_w / fb_h, std::max(0.0001f, zoom * 0.001f), zoom * 1000.0f);
+    //std::cout << "max: " << zoom * 1000.0f << std::endl;
 }
 
 void Camera::SetZoom(float z)
@@ -50,8 +52,10 @@ void Camera::SetZoom(float z)
 void Camera::Scroll(float offset)
 {
     //position += front * offset * SCROLL_SPEED;
-    zoom -= offset * SCROLL_SPEED;
-    zoom  = std::max(0.5f, zoom);
+    //zoom -= offset * SCROLL_SPEED;
+    zoom *= exp(offset);
+    zoom  = std::max(0.01f, zoom);
+    std::cout << zoom << std::endl;
 }
 
 void Camera::OnMouseButton(int button, int action)
