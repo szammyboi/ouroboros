@@ -1,26 +1,16 @@
 #include "Sim.h"
-#include "spdlog/spdlog.h"
 
 #include <thread>
 #include <vector>
 #include <execution>
 #include <algorithm>
 
-// this needs to not be hardcoded
-// we also need to properly implement the leapfrog with a half initial step
-// the half, recalc, then calc
-// combined with a epsilon and ...
-// also should probably calculate the sizeof the box each time with max positions
-// we need to possibly make the boxes contain multiple points
-// collisions, ...
+// this is hardcoded size
 Sim::Sim()
 	: m_Arena(sizeof(Box) * 10000000)
 {
-	std::cout << sizeof(Box) * 10000000;
-	spdlog::info("Sim Created...");
-
 	m_Tree = m_Arena.create<Box>();
-	m_Tree->halfExtent = glm::vec3(500'000);
+	m_Tree->halfExtent = glm::vec3(6.80674e+9);
 	m_Tree->pos = glm::vec3(0.0f);
 }
 

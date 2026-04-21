@@ -16,33 +16,25 @@ target "Simulation"
 		"./src",
 		"./vendor/glfw/include",
 		"./vendor/glad/include",
-		"./vendor/spdlog/include",
-		--"./vendor/entt/single_include/",
 		"./vendor/glm",
-		--"./vendor/stb",
 		"./vendor/imgui",
 		"./vendor",
 	}
 	add_deps {
 		"GLFW",
-		"SPDLOG",
 		"GLAD",
 		"IMGUI"
 	}
 	set_rundir "$(projectdir)"
-	if is_plat("macosx") then
-		add_frameworks {
-			"OpenGL"
-		}
-	elseif is_plat("windows") then
-		add_links {
-			"opengl32",
-			"shell32",
-			"user32",
-			"gdi32",
-		}
-		add_cxflags("/utf-8", {force=true})
-	end
+
+	add_links {
+		"opengl32",
+		"shell32",
+		"user32",
+		"gdi32",
+	}
+	add_cxflags("/utf-8", {force=true})
+
 
 target "IMGUI"
 	set_kind "static"
@@ -70,23 +62,11 @@ target "GLFW"
 		"./vendor/glfw/src/*.c",
 	}
 
-	if is_plat("macosx") then
-		add_defines "_GLFW_COCOA"
-		add_files "./vendor/glfw/src/*.m"
-		add_mxflags "-fno-objc-arc"
-		add_frameworks {
-			"Cocoa",
-			"CoreFoundation",
-			"IOKit",
-			"QuartzCore"
-		}
-	elseif is_plat("windows") then
-		add_defines {
-			"_GLFW_WIN32",
-			"_CRT_SECURE_NO_WARNINGS"
-		}
-		add_links "gdi32"
-	end
+	add_defines {
+		"_GLFW_WIN32",
+		"_CRT_SECURE_NO_WARNINGS"
+	}
+	add_links "gdi32"
 
 target "GLAD"
 	set_kind "static"
@@ -97,15 +77,3 @@ target "GLAD"
 	}
 	add_includedirs "./vendor/glad/include"
 	add_files "./vendor/glad/src/gl.c"
-
-target "SPDLOG"
-	set_kind "static"
-	add_defines "SPDLOG_COMPILED_LIB"
-	add_includedirs {
-		"./vendor/spdlog/include",
-		"./vendor/spdlog/include/spdlog"
-	}
-	add_files "./vendor/spdlog/src/*.cpp"
-	if is_plat("windows") then
-		add_cxflags("/utf-8", {force=true})
-	end

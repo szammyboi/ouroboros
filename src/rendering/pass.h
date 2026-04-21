@@ -100,12 +100,14 @@ struct RenderSequence
     void SetupMainImage()
     {
         glBindFramebuffer(GL_FRAMEBUFFER, mainImage.framebuffer);
+        glBindRenderbuffer(GL_RENDERBUFFER, mainImage.depth_rbo);
 		glViewport(0, 0, mainImage.resolution.x, mainImage.resolution.y);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     }
 
     void Execute()
     {
+        glEnable(GL_DEPTH_TEST);
         glActiveTexture(GL_TEXTURE0 + 2);
         glBindTexture(GL_TEXTURE_2D, mainImage.alt_tex);
         glGenerateMipmap(GL_TEXTURE_2D);

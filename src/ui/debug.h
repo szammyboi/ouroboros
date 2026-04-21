@@ -20,4 +20,6 @@ public:
 
 private:
 	int m_LOD = 0;
+	// in seconds
+	float timescale_base = 5'023'380.774;
 };

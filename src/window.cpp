@@ -120,8 +120,11 @@ glfwSwapInterval(0);
 	//glCullFace(GL_BACK);
 	glEnable(GL_MULTISAMPLE);  
 	
-	//		glViewport(0, 0, m_Specification.width, m_Specification.height);
-
+	//glViewport(0, 0, m_Specification.width, m_Specification.height);
+	printf("GL_VENDOR: %s\n", glGetString(GL_VENDOR));
+	printf("GL_RENDERER: %s\n", glGetString(GL_RENDERER));
+	printf("GL_VERSION: %s\n", glGetString(GL_VERSION));
 	glfwSetFramebufferSizeCallback(m_Window, FrameBufferSizeCallback);
 	glfwSetWindowPosCallback(m_Window, WindowPositionCallback);
 }
+

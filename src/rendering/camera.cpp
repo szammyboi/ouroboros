@@ -6,21 +6,6 @@
 
 void Camera::Update()
 {
-    /*glm::vec3 f;
-    f.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
-    f.y = sin(glm::radians(pitch));
-    f.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
-
-    front = glm::normalize(f);
-    right = glm::normalize(glm::cross(front, WORLD_UP));
-    up = glm::normalize(glm::cross(right, front));
-
-    int fb_w, fb_h; 
-    glfwGetFramebufferSize(Global::GetWindow()->GetNativeWindow(), &fb_w, &fb_h);
-    proj = glm::perspective(glm::radians(45.0f), (float)fb_w / fb_h, 1.0f, 400.0f);
-    
-    */
-
     float cp = cos(glm::radians(pitch));
     float sp = sin(glm::radians(pitch));
     float cy = cos(glm::radians(yaw));
@@ -38,9 +23,7 @@ void Camera::Update()
 
     int fb_w, fb_h;
     glfwGetFramebufferSize(Global::GetWindow()->GetNativeWindow(), &fb_w, &fb_h);
-    //proj = glm::perspective(glm::radians(45.0f), (float)fb_w / fb_h, 0.1f, 10000.0f);
-    proj = glm::perspective(glm::radians(0.033f), (float)fb_w / fb_h, std::max(0.0001f, zoom * 0.001f), zoom * 1000.0f);
-    //std::cout << "max: " << zoom * 1000.0f << std::endl;
+    proj = glm::perspective(glm::radians(45.0f), (float)fb_w / fb_h, 0.0001f, 1e15f);
 }
 
 void Camera::SetZoom(float z)
@@ -51,11 +34,9 @@ void Camera::SetZoom(float z)
 
 void Camera::Scroll(float offset)
 {
-    //position += front * offset * SCROLL_SPEED;
-    //zoom -= offset * SCROLL_SPEED;
     zoom *= exp(offset);
     zoom  = std::max(0.01f, zoom);
-    std::cout << zoom << std::endl;
+    zoom = std::min(zoom, 6.684582e+9f);
 }
 
 void Camera::OnMouseButton(int button, int action)
@@ -78,6 +59,20 @@ void Camera::OnMouseMove(float x, float y)
 
     lastMouseX = x;
     lastMouseY = y;
+}
+
+void Camera::GetViewSizeAU(float& width, float& height)
+{
+    int fb_w, fb_h;
+    glfwGetFramebufferSize(Global::GetWindow()->GetNativeWindow(), &fb_w, &fb_h);
+
+    float aspect = (float)fb_w / fb_h;
+    float fov = glm::radians(45.0f);
+
+    float d = zoom; // distance to target (AU)
+
+    height = 2.0f * d * tan(fov * 0.5f);
+    width  = height * aspect;
 }
 
 glm::mat4 Camera::GetView()

@@ -1,5 +1,4 @@
 #include "rendering/icosphere.h"
-
 #include "rendering/camera.h"
 #include "global.h"
 
@@ -12,7 +11,6 @@
 #include <new>
 #include <type_traits>
 
-// update for apple needed
 namespace IcoSphere {
 	static Renderer s_Renderer;
 	static uint32_t s_Count;
@@ -117,9 +115,6 @@ namespace IcoSphere {
 
 	void Submit(glm::mat4 model, glm::vec4 color)
 	{
-		//InstanceEntry entry = {model, color};
-		//std::memcpy(s_Renderer.instance_ptr, &entry, sizeof(InstanceEntry));
-
 		std::construct_at(reinterpret_cast<InstanceEntry*>(s_Renderer.instance_ptr), model, color);
 		s_Renderer.instance_ptr = s_Renderer.instance_ptr + sizeof(InstanceEntry);
 		s_Renderer.instance_offset++;
@@ -160,6 +155,8 @@ namespace IcoSphere {
 
 		BufferEntry buffer = s_Renderer.lods[5];
 		
+
+
 		s_Renderer.shader->Use();
 		s_Renderer.shader->SetUniformMatrix4f("proj", cam.GetProjection());
 		s_Renderer.shader->SetUniformMatrix4f("view", cam.GetView());
@@ -174,6 +171,8 @@ namespace IcoSphere {
 		s_Renderer.light_shader->SetUniformMatrix4f("view", cam.GetView());
 		s_Renderer.light_shader->SetUniform3f("lightPos", glm::vec3(0.0, 0.0, 0.0f));
 		s_Renderer.light_shader->SetUniform3f("lightColor", glm::vec3(1.0f));
+		s_Renderer.light_shader->SetUniform3f("camPos", cam.position);
+		s_Renderer.light_shader->SetUniform1f("bias", cam.zoom);
 		glDrawElementsInstancedBaseVertexBaseInstance(GL_TRIANGLES, buffer.index_count, GL_UNSIGNED_INT, (void*)buffer.index_byte_offset, s_Renderer.light_instance_offset, buffer.vertex_index, 0);
 	
 		s_Renderer.grain->SetUniform1f("time", (float)glfwGetTime());
@@ -183,7 +182,7 @@ namespace IcoSphere {
 		s_Renderer.finalpass->SetUniform1f("gamma", Global::GetPostProcessing().gamma);
 		s_Renderer.postprocessing->Execute();
 	}
-	// TO IMPLEMENT: SCALE
+	
 	void Draw(Camera& cam, int lod, glm::vec3 position, float scale, glm::vec3 lightPos, glm::vec3 color)
 	{
 		BufferEntry buffer = s_Renderer.lods[lod];

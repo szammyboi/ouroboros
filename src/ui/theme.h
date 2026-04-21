@@ -5,6 +5,8 @@
 #include <imgui/imgui.h>
 #include <imgui/misc/cpp/imgui_stdlib.h>
 
+// Sourced from https://github.com/ocornut/imgui/issues/707
+
 void setup_catppuccin_mocha_theme()
 {
 	ImGuiStyle& style = ImGui::GetStyle();

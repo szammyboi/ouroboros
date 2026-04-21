@@ -19,6 +19,7 @@ public:
 	void SetUniform1f(const std::string& uniform, float x);
 	void SetUniform2f(const std::string& uniform, glm::vec2 vec);
 	void SetUniform3f(const std::string& uniform, glm::vec3 vec);
+	void SetUniform3d(const std::string& uniform, glm::dvec3 vec);
 	void SetUniformMatrix4f(const std::string& uniform, glm::mat4 matrix);
 private:
 	unsigned m_Program;

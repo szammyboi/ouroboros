@@ -66,13 +66,6 @@ void Box::insert(Arena& arena, const Body* newobj)
 
 void Box::draw(Camera& cam, bool priority)
 {
-   // if (priority && object != nullptr)
-        //Octree::Draw(cam, pos, halfExtent * 2.0f, glm::vec3(0.0f, 1.0f, 0.0f), 1.0, true);
-    //else if (!priority)
-        //Octree::Draw(cam, pos, halfExtent * 2.0f, glm::vec3(0.3f), 1.0, true);
-
-    //IcoSphere::Draw(cam, 0, com, 1, glm::vec3(1.0f, 0.0f, 0.0f));
-
     for (Box* child : children) {
         if (child)
             child->draw(cam, priority);
@@ -100,7 +93,6 @@ Box* rebuild_tree(Arena& arena, Box* box, std::vector<Body>& bodies)
 glm::vec3 calc(float G, glm::vec3 curr_pos, float current_mass, glm::vec3 other_pos, float other_mass)
 {
     glm::vec3 r_vec = other_pos - curr_pos;
-    // need to abstract epsilon elsewhere
     float dist = glm::length(r_vec) + 0.0001f;
     return (r_vec * G * current_mass * other_mass) / float(std::pow(dist, 3));
 }
@@ -115,7 +107,7 @@ glm::vec3 Box::calculateForce(float G, float theta, Body* body)
     }
     
     float r = glm::distance(com, body->loc);
-    // fix this
+
     float d = halfExtent.x * 2.0f;
 
     if (d/r < theta) {

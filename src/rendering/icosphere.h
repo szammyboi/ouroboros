@@ -9,7 +9,6 @@
 #include "rendering/camera.h"
 #include "rendering/pass.h"
 
-// max isntance buffer needs to be dynamic based on hardware
 namespace IcoSphere {
     struct BufferEntry {
         uint32_t vertex_index;
