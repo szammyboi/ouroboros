@@ -119,64 +119,61 @@ int main()
 	sun.temperature = 5800;
 	sim.add_body(sun);
 
-	sun.loc = glm::vec3(63241.1, 0, 0);
-	//sim.add_body(sun);
-
 	Body earth;
 	earth.mass = 3.003e-6;
 	earth.loc = glm::vec3(1.0, 0.0, 0.0);
 	earth.vel = glm::vec3(0.0, 1.0, 0.0);
 	earth.radius = 4.26352e-5;
-	//sim.add_body(earth);
+	sim.add_body(earth);
 
 	Body mercury;
 	mercury.mass = 1.660e-7;
 	mercury.loc = glm::vec3(0.387, 0.0, 0.0);
 	mercury.vel = glm::vec3(0.0, 1.607, 0.0);
 	mercury.radius = 1.631e-5;
-	//sim.add_body(mercury);
+	sim.add_body(mercury);
 
 	Body venus;
 	venus.mass = 2.447e-6;
 	venus.loc = glm::vec3(0.723, 0.0, 0.0);
 	venus.vel = glm::vec3(0.0, 1.174, 0.0);
 	venus.radius = 4.045e-5;
-	//sim.add_body(venus);
+	sim.add_body(venus);
 
 	Body mars;
 	mars.mass = 3.213e-7;
 	mars.loc = glm::vec3(1.524, 0.0, 0.0);
 	mars.vel = glm::vec3(0.0, 0.808, 0.0);
 	mars.radius = 2.265e-5;
-	//sim.add_body(mars);
+	sim.add_body(mars);
 
 	Body jupiter;
 	jupiter.mass = 9.545e-4;
 	jupiter.loc = glm::vec3(5.203, 0.0, 0.0);
 	jupiter.vel = glm::vec3(0.0, 0.439, 0.0);
 	jupiter.radius = 4.778e-4;
-	//sim.add_body(jupiter);
+	sim.add_body(jupiter);
 
 	Body saturn;
 	saturn.mass = 2.857e-4;
 	saturn.loc = glm::vec3(9.537, 0.0, 0.0);
 	saturn.vel = glm::vec3(0.0, 0.325, 0.0);
 	saturn.radius = 4.027e-4;
-	//sim.add_body(saturn);
+	sim.add_body(saturn);
 
 	Body uranus;
 	uranus.mass = 4.365e-5;
 	uranus.loc = glm::vec3(19.191, 0.0, 0.0);
 	uranus.vel = glm::vec3(0.0, 0.228, 0.0);
 	uranus.radius = 1.708e-4;
-	//sim.add_body(uranus);
+	sim.add_body(uranus);
 
 	Body neptune;
 	neptune.mass = 5.149e-5;
 	neptune.loc = glm::vec3(30.068, 0.0, 0.0);
 	neptune.vel = glm::vec3(0.0, 0.182, 0.0);
 	neptune.radius = 1.655e-4;
-	//sim.add_body(neptune);
+	sim.add_body(neptune);
 
 	
 		
