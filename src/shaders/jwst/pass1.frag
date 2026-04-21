@@ -1,3 +1,5 @@
+// Sourced kernel from https://www.shadertoy.com/view/clBSzm
+
 #version 420 core
 
 int Nc = 63; 

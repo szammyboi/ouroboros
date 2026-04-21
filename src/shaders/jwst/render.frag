@@ -1,10 +1,6 @@
+// Sourced kernel from https://www.shadertoy.com/view/clBSzm
+
 #version 330 core
-
-//#define exposure 3.5
-//#define sqrexposure 0.5
-//#define gamma 1.3
-//#define bloom 10.0
-
 
 in vec2 vUV;
 out vec4 FragColor;

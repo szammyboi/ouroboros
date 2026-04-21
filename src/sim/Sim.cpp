@@ -40,15 +40,4 @@ void Sim::step(float dt)
 
     for (auto& body : Bodies)
         body.vel += body.acc * (0.5f * dt_scaled);
-	
-	/*std::for_each(
-		std::execution::par,
-		Bodies.begin(),
-		Bodies.end(),
-		[&](Body& body)
-		{
-			body.vel += body.acc * dt;
-			body.loc += body.vel * dt;
-		}
-	);*/
 }
