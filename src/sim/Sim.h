@@ -11,7 +11,7 @@ struct SimConfig
 {
 	float G { 1.0 }; // Nm^2/kg^2
 	double simDt { 1.0 / 120.0 };
-	float timeMultiplier = 0.2f;
+	float timeMultiplier = 1.0f;
 };
 
 class Sim
