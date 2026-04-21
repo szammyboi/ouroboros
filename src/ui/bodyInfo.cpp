@@ -56,10 +56,6 @@ void BodyInfo::OnUpdate(){
     static float orbitRadius = 1.0f;   // AU
     static float bodyMass    = 1e-6f;  // solar masses
 
-    if (ImGui::Button("Delete Body")) {
-        body.mass = 1e-15f;
-        Global::GetSettings().selectedBody = -1;
-    }
     if (ImGui::Button("Add Orbiting Body")) {
         placing = true;
     }
