@@ -162,17 +162,8 @@ void MenuBar::OnUpdate()
 			if (ImGui::BeginMenu("Rendering"))
 			{
 				ImGui::PushItemFlag(ImGuiItemFlags_AutoClosePopups, false);
-				if (ImGui::MenuItem("Draw Outlines", "", &Global::GetSettings().render.drawOutlines))
-				{
-					if (Global::GetSettings().render.drawOutlines)
-						glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-					else
-						glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-				}
 
 				ImGui::MenuItem("Draw Octree", "", &Global::GetSettings().render.drawOctree);
-				ImGui::MenuItem("Draw Planets", "", &Global::GetSettings().render.drawPlanets);
-				ImGui::MenuItem("Draw Stars", "", &Global::GetSettings().render.drawStars);
 
 				ImGui::PopItemFlag();
 				ImGui::EndMenu();
