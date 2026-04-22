@@ -13,7 +13,7 @@ struct Camera
     float pitch = 0.0f;
     float yaw = -90.0f;
 
-    glm::vec3 position = glm::vec3(0.0, 0.0, 3.0f);
+    glm::vec3 position = glm::vec3(0.0, 0.0, 1.0f);
     glm::vec3 front = glm::vec3(0.0f, 0.0f, -1.0f);
     glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f);
     glm::vec3 target = glm::vec3(0.0f);
@@ -30,7 +30,7 @@ struct Camera
     void Scroll(float offset);
     void OnMouseMove(float x, float y);
     void OnMouseButton(int button, int action);
-
+    void GetViewSizeAU(float& width, float& height);
 
     glm::mat4 GetView();
 

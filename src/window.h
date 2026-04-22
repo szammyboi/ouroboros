@@ -4,13 +4,11 @@
 #include <GLFW/glfw3.h>
 #include <string>
 
-#ifndef __APPLE__
-	#define NOMINMAX
-	#define GLFW_EXPOSE_NATIVE_WIN32
-	#include <glfw/glfw3native.h>
-	#include <dwmapi.h>
-	#pragma comment(lib, "dwmapi.lib")
-#endif
+#define NOMINMAX
+#define GLFW_EXPOSE_NATIVE_WIN32
+#include <glfw/glfw3native.h>
+#include <dwmapi.h>
+#pragma comment(lib, "dwmapi.lib")
 
 struct WindowSpecification
 {

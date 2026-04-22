@@ -58,7 +58,7 @@ namespace Octree {
 			boxes.pop();
 
 			if (current->object != nullptr)
-				Submit(current->pos, current->halfExtent * 2.0f, glm::vec4(0.117f, 0.117f, 0.172f, 1.0f));
+				Submit(current->pos, current->halfExtent * 2.0f, glm::vec4(1.0f, 1.0f, 1.0f, 1.0f));
 
 			for (Box* child : current->children) {
 				if (child)
@@ -71,11 +71,9 @@ namespace Octree {
 	{
 		glm::mat4 model = glm::translate(glm::mat4(1.0), position);
 		model = glm::scale(model, scale);
-		
-		//InstanceEntry entry = {model, color};
-		//std::memcpy(s_Renderer.instance_ptr, &entry, sizeof(InstanceEntry));
+
 		std::construct_at(reinterpret_cast<InstanceEntry*>(s_Renderer.instance_ptr), model, color);
-		//std::construct_at<
+
 		s_Renderer.instance_ptr = s_Renderer.instance_ptr + sizeof(InstanceEntry);
 		s_Renderer.instance_offset++;
 	}

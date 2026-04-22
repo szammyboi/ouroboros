@@ -5,7 +5,6 @@
 #include "ui/ui.h"
 #include "ui/debug.h"
 #include "rendering/camera.h"
-#include  "spdlog/spdlog.h"
 
 #include "global.h"
 
@@ -69,7 +68,6 @@ void MouseButtonCallback(GLFWwindow*, int button, int action, int)
 		
 		if (closestIndex != -1 || Global::GetSettings().selectedBody == -1)
 			Global::GetSettings().selectedBody = closestIndex;
-		spdlog::info("closest: {}", closestIndex);
 	}
 
 	if (button == GLFW_MOUSE_BUTTON_RIGHT && action == GLFW_PRESS) {
@@ -84,7 +82,7 @@ void CursorPosCallback(GLFWwindow*, double x, double y)
 
 int main()
 {
-	const WindowSpecification spec = { 800, 800, "Ouroboros Simulator",
+	const WindowSpecification spec = { 1920, 1080, "Ouroboros Simulator",
 		false, false, true };
 
 	Global::Initialize(spec);
@@ -105,7 +103,7 @@ int main()
 
 	int lod_level = 0;
 
-	IcoSphere::InitRenderer({800, 800});
+	IcoSphere::InitRenderer({1920, 1080});
 	Octree::InitRenderer();
 
 	Shared<View> ui = View::CreateView<UI>(*window);
@@ -115,37 +113,76 @@ int main()
 	auto debug_view = ui->GetView<Debug>();
 
 	Body sun;
-	sun.mass = 1.989e6f;
+	sun.mass = 1.0f;
 	sun.emission = glm::vec4(0.97f, 0.84f, 0.1f, 1.0f);
+	sun.radius = 0.0046;
+	sun.temperature = 5800;
 	sim.add_body(sun);
 
-	auto add_planet = [&](float mass, float radius, float distance, float angle = 0.0f)
-	{
-		Body planet;
-		planet.mass = mass;
-		planet.loc = { distance * cos(angle), distance * sin(angle), 0.0f };
-		float r = glm::length(planet.loc - sun.loc);
-		float speed = sqrt(sim.config.G * sun.mass / r);
-		planet.vel = { -speed * sin(angle), speed * cos(angle), 0.0f };
-		sim.add_body(planet);
-	};
+	Body earth;
+	earth.mass = 3.003e-6;
+	earth.loc = glm::vec3(1.0, 0.0, 0.0);
+	earth.vel = glm::vec3(0.0, 1.0, 0.0);
+	earth.radius = 4.26352e-5;
+	sim.add_body(earth);
 
-	add_planet(sun.mass * 1.651e-7f, 0.38f,  0.39f);  // Mercury
-	add_planet(sun.mass * 2.447e-6f, 0.95f,  0.72f);  // Venus
-	add_planet(sun.mass * 3.003e-6f, 1.00f,  1.00f);  // Earth
-	add_planet(sun.mass * 3.227e-7f, 0.53f,  1.52f);  // Mars
-	add_planet(sun.mass * 9.545e-4f, 11.2f,  5.20f);  // Jupiter
-	add_planet(sun.mass * 2.857e-4f, 9.45f,  9.58f);  // Saturn
-	add_planet(sun.mass * 4.366e-5f, 4.01f, 19.20f);  // Uranus
-	add_planet(sun.mass * 5.151e-5f, 3.88f, 30.05f);  // Neptune
+	Body mercury;
+	mercury.mass = 1.660e-7;
+	mercury.loc = glm::vec3(0.387, 0.0, 0.0);
+	mercury.vel = glm::vec3(0.0, 1.607, 0.0);
+	mercury.radius = 1.631e-5;
+	sim.add_body(mercury);
+
+	Body venus;
+	venus.mass = 2.447e-6;
+	venus.loc = glm::vec3(0.723, 0.0, 0.0);
+	venus.vel = glm::vec3(0.0, 1.174, 0.0);
+	venus.radius = 4.045e-5;
+	sim.add_body(venus);
+
+	Body mars;
+	mars.mass = 3.213e-7;
+	mars.loc = glm::vec3(1.524, 0.0, 0.0);
+	mars.vel = glm::vec3(0.0, 0.808, 0.0);
+	mars.radius = 2.265e-5;
+	sim.add_body(mars);
+
+	Body jupiter;
+	jupiter.mass = 9.545e-4;
+	jupiter.loc = glm::vec3(5.203, 0.0, 0.0);
+	jupiter.vel = glm::vec3(0.0, 0.439, 0.0);
+	jupiter.radius = 4.778e-4;
+	sim.add_body(jupiter);
+
+	Body saturn;
+	saturn.mass = 2.857e-4;
+	saturn.loc = glm::vec3(9.537, 0.0, 0.0);
+	saturn.vel = glm::vec3(0.0, 0.325, 0.0);
+	saturn.radius = 4.027e-4;
+	sim.add_body(saturn);
+
+	Body uranus;
+	uranus.mass = 4.365e-5;
+	uranus.loc = glm::vec3(19.191, 0.0, 0.0);
+	uranus.vel = glm::vec3(0.0, 0.228, 0.0);
+	uranus.radius = 1.708e-4;
+	sim.add_body(uranus);
+
+	Body neptune;
+	neptune.mass = 5.149e-5;
+	neptune.loc = glm::vec3(30.068, 0.0, 0.0);
+	neptune.vel = glm::vec3(0.0, 0.182, 0.0);
+	neptune.radius = 1.655e-4;
+	sim.add_body(neptune);
+
+	
 		
 	while (window->isOpen())
 	{
 		Sim& sim = Global::GetSim();
 		int sel = Global::GetSettings().selectedBody;
-		if(sel >= 0 && sel < (int)sim.Bodies.size())
-			Global::GetCamera().target = sim.Bodies[sel].loc;
-		Global::GetCamera().Update();
+		//Global::GetCamera().Update();
+		
 		auto now = std::chrono::high_resolution_clock::now();
 		std::chrono::duration<double> delta = now - last;
 		last = now;
@@ -159,6 +196,10 @@ int main()
 			accumulator -= sim.config.simDt;
 		}
 
+		if(sel >= 0 && sel < (int)sim.Bodies.size())
+			Global::GetCamera().target = sim.Bodies[sel].loc;
+		Global::GetCamera().Update();
+
 		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
@@ -167,19 +208,21 @@ int main()
 		IcoSphere::StartBatch();
 		for (Body& body : sim.Bodies) {
 			glm::mat4 model = glm::translate(glm::mat4(1.0), body.loc);
-			model = glm::scale(model, glm::vec3(0.1));
+			model = glm::scale(model, glm::vec3(0.046));
 
 			float distance = glm::distance(Global::GetCamera().position, body.loc);
 			int lodLevel = static_cast<int>(glm::floor(log2(distance / 5.0f + 1e-6f)));
 			lodLevel = 5 - glm::clamp(lodLevel, 0, 5);
 
-			if (body.emission.a != 0.0f)
-				IcoSphere::SubmitLight(model, body.loc,  body.emission);
+			if (body.temperature != 0.0f)
+				IcoSphere::SubmitLight(model, body.loc, glm::vec4(body.temperature, glm::vec3(0.0)));
 			else
-				IcoSphere::Submit(model, glm::vec4(0.2));
+				IcoSphere::Submit(model, glm::vec4(1.0));
 			i++;
 		}
 		IcoSphere::EndBatch(Global::GetCamera());
+		
+		glClear(GL_DEPTH_BUFFER_BIT);
 
 		Octree::StartBatch();
 		if (Global::GetSettings().render.drawOctree)

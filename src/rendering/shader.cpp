@@ -107,6 +107,14 @@ void Shader::SetUniform3f(const std::string& uniform, glm::vec3 vec)
 	glUniform3fv(location, 1, glm::value_ptr(vec));
 }
 
+void Shader::SetUniform3d(const std::string& uniform, glm::dvec3 vec)
+{
+	Use();
+
+	int location = glGetUniformLocation(m_Program, uniform.c_str());
+	glUniform3dv(location, 1, glm::value_ptr(vec));
+}
+
 void Shader::SetUniform1i(const std::string& uniform, int x)
 {
 	Use();

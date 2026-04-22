@@ -14,7 +14,7 @@ flat out float vertexCount;
 
 uniform mat4 proj;
 uniform mat4 view;
-//uniform mat4 model;
+
 uniform float count;
 uniform vec3 color;
 uniform int lod;
@@ -36,7 +36,6 @@ layout(binding = 1, std430) readonly buffer instanceSSBO {
 void main()
 {
     Light instance = instances[gl_BaseInstance + gl_InstanceID];
-   // vec3 normal = normalize(aPos);
 
     gl_Position =  proj * view * instance.transform * vec4(aPos, 1.0);
 

@@ -1,5 +1,6 @@
 #include "ui/debug.h"
 #include "global.h"
+#include <format>
 
 void Debug::OnAttach()
 {
@@ -7,6 +8,37 @@ void Debug::OnAttach()
 
 void Debug::OnDetach()
 {
+}
+
+std::string CalculateUnits(float seconds)
+{
+	if (seconds > 3.154e+7) {
+		return std::format("{:.2f} year(s)", seconds / 3.154e+7);
+	}
+	if (seconds > 86400) {
+		return std::format("{:.2f} day(s)", seconds / 86400);
+	}
+
+	if (seconds > 3600) {
+		return std::format("{:.2f} hours(s)", seconds / 3600);
+	}
+
+	if (seconds > 60) {
+		return std::format("{:.2f} minute(s)", seconds / 60);
+	}
+	return std::format("{:.2f} second(s)", seconds);
+}
+
+std::string CalculateUnitsDistance(float distance)
+{
+	if (distance > 206265) {
+		return std::format("{:.2f} PC", distance / 206265);
+	}
+
+	if (distance > 63241.1) {
+		return std::format("{:.2f} LY", distance / 63241.1);
+	}
+	return std::format("{:.2f} AU", distance);
 }
 
 void Debug::OnUpdate()
@@ -32,51 +64,49 @@ void Debug::OnUpdate()
 	{
 		if (ImGui::BeginTable("table2", 3))
 		{
-			for (int row = 0; row < 1; row++)
-			{
-				ImGui::TableNextRow();
+			ImGui::TableNextRow();
 				ImGui::TableNextColumn();
 				ImGui::AlignTextToFramePadding();
-				ImGui::Text("Subdivisions: ");
+				ImGui::Text("Time Multiplier: ");
 				ImGui::TableNextColumn();
 				ImGui::SetNextItemWidth(100);
-				if (ImGui::InputInt("### subdivisions", &m_LOD, 1, 1))
-				{
-					m_LOD = std::min(5, std::max(0, m_LOD));
-				}
-			}
+				ImGui::SliderFloat("### ttg", &Global::GetSim().config.timeMultiplier, 0.05, 10.0f, "%.7f");
+			
+			ImGui::TableNextRow();
+				ImGui::TableNextColumn();
+				ImGui::AlignTextToFramePadding();
+				ImGui::Text("1 Second =  ");
+				ImGui::TableNextColumn();
+				ImGui::SetNextItemWidth(100);
+				ImGui::Text(CalculateUnits(timescale_base * Global::GetSim().config.timeMultiplier).c_str());
+
+			float width, height;
+			Global::GetCamera().GetViewSizeAU(width, height);
 
 			ImGui::TableNextRow();
-                ImGui::TableNextColumn();
-                ImGui::AlignTextToFramePadding();
-                ImGui::Text("Bloom: ");
-                ImGui::TableNextColumn();
-                ImGui::SetNextItemWidth(100);
-                ImGui::SliderFloat("### bloom", &Global::GetPostProcessing().bloom, 0.0, 10.0f);
+				ImGui::TableNextColumn();
+				ImGui::AlignTextToFramePadding();
+				ImGui::Text("Distance: ");
+				ImGui::TableNextColumn();
+				ImGui::SetNextItemWidth(100);
+				ImGui::Text(CalculateUnitsDistance(glm::distance(Global::GetCamera().position, Global::GetSettings().selectedBody != -1 ? Global::GetSim().Bodies[Global::GetSettings().selectedBody].loc : glm::vec3(0.0)) ).c_str());
 
-				ImGui::TableNextRow();
-                ImGui::TableNextColumn();
-                ImGui::AlignTextToFramePadding();
-                ImGui::Text("Exposure: ");
-                ImGui::TableNextColumn();
-                ImGui::SetNextItemWidth(100);
-                ImGui::SliderFloat("### exp", &Global::GetPostProcessing().exposure, 0.0, 5.0f);
+			ImGui::TableNextRow();
+				ImGui::TableNextColumn();
+				ImGui::AlignTextToFramePadding();
+				ImGui::Text("Frame Width: ");
+				ImGui::TableNextColumn();
+				ImGui::SetNextItemWidth(100);
+				ImGui::Text(CalculateUnitsDistance(width).c_str());
 
-			 ImGui::TableNextRow();
-                ImGui::TableNextColumn();
-                ImGui::AlignTextToFramePadding();
-                ImGui::Text("SqrExposure: ");
-                ImGui::TableNextColumn();
-                ImGui::SetNextItemWidth(100);
-                ImGui::SliderFloat("### sqre", &Global::GetPostProcessing().sqrexposure, 0.0, 5.0f);
+			ImGui::TableNextRow();
+				ImGui::TableNextColumn();
+				ImGui::AlignTextToFramePadding();
+				ImGui::Text("Frame Height: ");
+				ImGui::TableNextColumn();
+				ImGui::SetNextItemWidth(100);
+				ImGui::Text(CalculateUnitsDistance(height).c_str());
 
-				 ImGui::TableNextRow();
-                ImGui::TableNextColumn();
-                ImGui::AlignTextToFramePadding();
-                ImGui::Text("Gamma: ");
-                ImGui::TableNextColumn();
-                ImGui::SetNextItemWidth(100);
-                ImGui::SliderFloat("### gamma", &Global::GetPostProcessing().gamma, 0.0, 5.0f);
 
 			ImGui::TableNextRow();
 				ImGui::TableNextColumn();
@@ -84,7 +114,7 @@ void Debug::OnUpdate()
 				ImGui::Text("Gravity: ");
 				ImGui::TableNextColumn();
 				ImGui::SetNextItemWidth(100);
-				ImGui::SliderFloat("### g", &Global::GetSim().config.G, 0.0, 0.001f, "%.7f");
+				ImGui::SliderFloat("### g", &Global::GetSim().config.G, 0.0, 10.0f, "%.7f");
 			ImGui::EndTable();
 		}
 

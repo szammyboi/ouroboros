@@ -45,6 +45,7 @@ void Window::Initialize()
 
 	GLFWmonitor* monitor = glfwGetPrimaryMonitor();
 
+	
 	if (m_Specification.fullscreen)
 	{
 		const GLFWvidmode* mode = glfwGetVideoMode(monitor);
@@ -76,7 +77,7 @@ void Window::Initialize()
 	}
 
 	glfwMakeContextCurrent(m_Window);
-
+glfwSwapInterval(0);
 #ifndef __APPLE__
 	m_HWND = glfwGetWin32Window(m_Window);
 	LONG style = GetWindowLong(m_HWND, GWL_STYLE);
@@ -118,8 +119,12 @@ void Window::Initialize()
 	//glEnable(GL_CULL_FACE);
 	//glCullFace(GL_BACK);
 	glEnable(GL_MULTISAMPLE);  
-	//		glViewport(0, 0, m_Specification.width, m_Specification.height);
-
+	
+	//glViewport(0, 0, m_Specification.width, m_Specification.height);
+	printf("GL_VENDOR: %s\n", glGetString(GL_VENDOR));
+	printf("GL_RENDERER: %s\n", glGetString(GL_RENDERER));
+	printf("GL_VERSION: %s\n", glGetString(GL_VERSION));
 	glfwSetFramebufferSizeCallback(m_Window, FrameBufferSizeCallback);
 	glfwSetWindowPosCallback(m_Window, WindowPositionCallback);
 }
+

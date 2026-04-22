@@ -9,4 +9,6 @@ class BodyInfo : public View {
         void OnAttach() override {}
         void OnDetach() override {}
         void OnUpdate() override;
+    private:
+        bool placing = false;
 };
